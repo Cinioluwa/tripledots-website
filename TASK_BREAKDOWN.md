@@ -40,9 +40,9 @@
 - Estimated: 3-4 days
 - Priority: High
 
-**Dev #7 - Careers Page**
-- Task: Build careers page with job listings
-- Files: `src/careers/`
+**Dev #7 - Courses Page**
+- Task: Build courses page with job listings
+- Files: `src/courses/`
 - Estimated: 2-3 days
 - Priority: Low
 

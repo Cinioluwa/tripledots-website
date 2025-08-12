@@ -74,7 +74,7 @@ git push origin feature/[your-name]/[task-name]
 src/
 ├── about/          # About page components
 ├── assets/         # Images, icons, logos
-├── careers/        # Careers page components
+├── courses/        # Courses page components
 ├── contact/        # Contact page components
 ├── footer/         # Footer component
 ├── hero/           # Hero section component
