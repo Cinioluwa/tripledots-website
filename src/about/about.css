@@ -1,0 +1,25 @@
+body{
+    padding: 2% 5%;
+    margin: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: space-between;
+    align-items: center;
+}
+h1{
+    color: rgb(12, 12, 107);
+    font-size: 40px;
+    font-weight: bold;
+    text-shadow: 1px 3px 3px rgba(0, 0, 0, 0.414);
+}
+p{
+    font-size: 15px;
+    line-height: 1.6;
+    
+}
+.img{
+    display: flex;
+    height: 200px;
+    width: 250px;
+    gap: 35px;
+    
+}
