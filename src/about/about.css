@@ -1,0 +1,231 @@
+/* Import Palanquin fonts */
+@import url('https://fonts.googleapis.com/css2?family=Palanquin:wght@400;500;600;700&family=Palanquin+Dark:wght@400;500;600;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Palanquin", sans-serif;
+    padding: 3rem 2rem;
+    background: #ffffff;
+    min-height: 100vh;
+    /* default max visible image height for About page (desktop) — use the real image height */
+    --about-image-max-height: 330px;
+    line-height: 2;
+}
+
+#main{
+    display: flex;
+    flex-direction: column;
+    /* use the same max-width as the courses template so pages align */
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+h1 {
+    color: #1E2551;
+    font-family: "Palanquin Dark", sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    text-align: left;
+    /* align similarly to courses (keeps visual rhythm across pages) */
+    margin: 0 0 50px 150px;
+    text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.3);
+}
+
+p {
+    font-size: 20px;
+    line-height: 2;
+    font-weight: 500;
+    color: #333333;
+    text-align: justify;
+    /* align paragraph with header's left offset on desktop and keep the same right inset for a consistent text column */
+    margin: 0 150px 0 70px;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px auto;
+    /* allow the image row to take full available width but cap it to keep rhythm with #main */
+    width: 100%;
+    max-width: 1200px;
+    /* keep images on one row on desktop so they appear side-by-side */
+    flex-wrap: nowrap;
+}
+
+.image-container {
+    position: relative;
+    padding: 25px;
+    /* allow each image container to size based on its content instead of forcing equal widths */
+    /* allow image containers to size to their intrinsic width on desktop so 514x330 and 602x330 display correctly */
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 700px; /* prevents extremely wide images while allowing taller images to maintain height */
+    /* keep containers from vertically centering so taller images show fully aligned at the top */
+    align-self: flex-start;
+}
+
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 60px;
+    height: 60px;
+    border-top: 5px solid #1e2551;
+    border-left: 5px solid #1e2551;
+    z-index: 2;
+}
+
+.image-container::after {
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 60px;
+    height: 60px;
+    border-bottom: 5px solid #1e2551;
+    border-right: 5px solid #1e2551;
+    z-index: 2;
+}
+
+.image-container img {
+    display: block;
+    /* prefer keeping natural aspect ratio; limit width to container and cap height so both images appear the same visual length */
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: var(--about-image-max-height); /* responsive cap, controlled via media queries below */
+    object-fit: contain;
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 56px;
+        margin: 0 0 40px 20px;
+    }
+    
+    p {
+        font-size: 17px;
+    margin: 0 20px 35px 20px;
+    }
+    
+    .img {
+        gap: 30px;
+        margin: 35px auto;
+    /* keep images side-by-side at wide tablets where they fit; wrapping will be handled at 900px */
+    }
+    
+    .image-container {
+    min-width: 280px;
+    max-width: 450px;
+    width: auto;
+    }
+}
+
+/* Intermediate breakpoint: allow wrapping and two-column layout on smaller tablets/laptops */
+@media (max-width: 900px) {
+    .img {
+        flex-wrap: wrap;
+    }
+
+    .image-container {
+        /* two-column layout when viewport is narrower */
+        min-width: 260px;
+        max-width: 45%;
+        width: 45%;
+    }
+}
+
+/* Mobile tablet breakpoint */
+@media (max-width: 768px) {
+    body {
+        padding: 2rem 1rem;
+    }
+    
+    h1 {
+        font-size: 48px;
+        text-align: center;
+        margin: 0 0 30px 0;
+        text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    p {
+        font-size: 15px;
+    margin: 0 10px 0 10px;
+        text-align: left;
+        line-height: 2;
+    }
+    
+    .img {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        margin: 30px auto;
+        width: 100%;
+    }
+    
+    .image-container {
+        min-width: 250px;
+        max-width: 400px;
+        width: 100%;
+    }
+    
+    .image-container::before,
+    .image-container::after {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 480px) {
+    body {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    h1 {
+        font-size: 36px;
+        margin: 0 0 25px 0;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    p {
+        font-size: 15px;
+    margin: 0 5px 0 5px;
+        line-height: 2;
+    }
+    
+    .img {
+        gap: 20px;
+        margin: 25px auto;
+        width: 100%;
+    }
+    
+    .image-container {
+        min-width: 200px;
+        max-width: 320px;
+        padding: 20px;
+    /* lower the max-height on small screens so images fit better vertically */
+    --about-image-max-height: 300px;
+    }
+    
+    .image-container::before,
+    .image-container::after {
+        width: 40px;
+        height: 40px;
+        border-width: 4px;
+    }
+    
+    .image-container::before {
+        top: 12px;
+        left: 12px;
+    }
+    
+    .image-container::after {
+        bottom: 12px;
+        right: 12px;
+    }
+}

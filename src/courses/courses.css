@@ -1,0 +1,172 @@
+
+/* Import Palanquin fonts */
+@import url('https://fonts.googleapis.com/css2?family=Palanquin:wght@400;500;600;700&family=Palanquin+Dark:wght@400;500;600;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Palanquin", sans-serif;
+    padding: 3rem 2rem;
+    background: #ffffff;
+    background-image: url('../assets/pic2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+h1{
+    color: #ffffff;
+    font-family: "Palanquin Dark", sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    text-align: left;
+    margin: 0 0 50px 150px;
+    text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.829);
+
+}
+
+#main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Course cards layout */
+.card{
+    background: #c6e5f5;
+    border-radius: 25px;
+    width: 362px;
+    height: 250px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0px 18px 2px 0px rgba(0, 0, 0, 0.5);
+    margin: 5px;
+}
+
+.card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0px 20px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.card:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+}
+
+.head{
+    color: #000000;
+    font-family: "Palanquin Dark", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 13px 0 20px 0;
+}
+
+.write {
+    color: #000000;
+    font-family: "Palanquin", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    margin: 15px 50px 0 50px;
+    line-height: 2;
+}
+
+
+
+/**Mobile and Tablet breakpoints**/
+@media(max-width: 1200px) {
+    h1 {
+        margin: 0 0 40px 20px;
+    }
+    
+    #main {
+        gap: 25px;
+    }
+    
+    .card {
+        width: 320px;
+        height: 220px;
+    }
+    
+    .head {
+        font-size: 20px;
+    }
+    
+    .write {
+        font-size: 16px;
+        margin: 15px 30px 0 30px;
+        line-height: 1.8;
+    }
+}
+
+@media(max-width: 768px) {
+    body {
+        padding: 2rem 1rem;
+        background-image: url('../assets/pic2_mobile.png');
+    }
+    
+    h1 {
+        font-size: 48px;
+        text-align: center;
+        margin: 0 0 30px 0;
+        text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.7);
+    }
+    
+    #main {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card{
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        min-height: 167px;
+        margin-bottom: 20px;
+    }
+    
+    .write {
+        margin: 15px 20px 0 20px;
+        line-height: 1.5;
+    }
+}
+
+@media(max-width: 480px) {
+    body {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    h1 {
+        font-size: 36px;
+        text-align: center;
+        margin: 0 0 25px 0;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+    }
+    
+    .card {
+        max-width: 272px;
+        padding: 15px;
+        height: auto;
+        min-height: 150px;
+    }
+    
+    .head {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .write {
+        font-size: 14px;
+        margin: 10px 15px 0 15px;
+        line-height: 1.4;
+    }
+}
