@@ -1,0 +1,92 @@
+body{
+    font-family: 'Palanquin Dark', sans-serif;
+    color: #333;
+    /* margin: 30px; */
+    margin-left: 20px;
+    padding-left: 20px;
+}
+h1 {
+    color: #1E2551;
+    font-size: 40px;
+}
+h1:hover {
+    text-decoration: underline;
+    text-decoration-color: #1877F2;
+    text-decoration-thickness: 3px;
+}   
+.service {
+    display: block;
+}
+/* ... */
+.bootcamp {
+    margin-left: 10px;
+}
+.bootcamp:hover {
+    text-decoration: underline;
+    text-decoration-color:#1877F2;
+    text-decoration-thickness: 2px;
+}
+.section-1 {
+    margin-top: 10px;
+}
+.block-1 {
+    display: flex;
+    gap: 30px;
+}
+.pic-1 {
+    background-color: #4985d4;
+    width: 370px;
+    height: 200px;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+.pic-1 img {
+    width: 370px;
+    height: 200px;
+    object-fit: cover; /* Makes sure the image fills the box and crops excess */
+    border-radius: 20px; /* Match the parent's border-radius */
+}
+.text-1 {
+    color: #000;
+    font-size: px;
+    font-weight: px;
+    /* margin-left: 30px; */
+    margin-top: 30px;
+}
+/* ... */
+.student {
+    margin-left: 10px;
+}
+.student:hover {
+    text-decoration: underline;
+    text-decoration-color:#1877F2;
+    text-decoration-thickness: 2px;
+}
+.section-2 {
+    margin-top: 20px;
+}
+.block-2 {
+    display: flex;
+    gap: 30px;
+    /* margin-top: 20px; */
+}
+.pic-2 {
+    background-color: #4985d4;
+    width: 370px;
+    height: 200px;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+.pic-2 img {
+    width: 370px;
+    height: 200px;
+    object-fit: cover; /* Makes sure the image fills the box and crops excess */
+    border-radius: 20px; /* Match the parent's border-radius */
+}
+.text-2 {
+    color: #000;
+    font-size: px;
+    font-weight: px;
+    /* margin-left: 30px; */
+    margin-top: 30px;
+}
