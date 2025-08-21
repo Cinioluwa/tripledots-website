@@ -1,92 +1,238 @@
-body{
-    font-family: 'Palanquin Dark', sans-serif;
-    color: #333;
-    /* margin: 30px; */
-    margin-left: 20px;
-    padding-left: 20px;
+/* Import Palanquin fonts */
+@import url('https://fonts.googleapis.com/css2?family=Palanquin:wght@400;500;600;700&family=Palanquin+Dark:wght@400;500;600;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Palanquin", sans-serif;
+    padding: 3rem 2rem;
+    background: #ffffff;
+    min-height: 100vh;
+    line-height: 1.6;
 }
-h1 {
+
+h1{
     color: #1E2551;
-    font-size: 40px;
+    font-family: "Palanquin Dark", sans-serif;
+    font-size: 64px;
+    font-weight: 400;
+    text-align: left;
+    /* align similarly to courses (keeps visual rhythm across pages) */
+    margin: 0 0 50px 150px;
+    text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.3);
 }
-h1:hover {
+
+#main{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* Service sections */
+.section-1, .section-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.bootcamp, .student{
+    color: #000000;
+    font-family: "Palanquin Dark", sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-left: 150px;
+}
+
+/* .bootcamp:hover, .student:hover {
     text-decoration: underline;
     text-decoration-color: #1877F2;
     text-decoration-thickness: 3px;
-}   
-.service {
-    display: block;
-}
-/* ... */
-.bootcamp {
-    margin-left: 10px;
-}
-.bootcamp:hover {
-    text-decoration: underline;
-    text-decoration-color:#1877F2;
-    text-decoration-thickness: 2px;
-}
-.section-1 {
-    margin-top: 10px;
-}
-.block-1 {
+} */
+
+.block-1, .block-2 {
     display: flex;
-    gap: 30px;
+    gap: 0px;
+    align-items: flex-start;
+    margin: 0 150px;
 }
-.pic-1 {
-    background-color: #4985d4;
-    width: 370px;
-    height: 200px;
-    box-sizing: border-box;
+
+.pic-1, .pic-2 {
+    /* background-color: #4985d4; */
+    width: 80%;
+    height: 80%;
+    border-radius: 20px;
+    overflow: hidden;
+    /* box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); */
+    transition: transform 0.3s ease;
+}
+
+.pic-1:hover, .pic-2:hover {
+    transform: translateY(-1px);
+}
+
+.pic-1 img, .pic-2 img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
     border-radius: 20px;
 }
-.pic-1 img {
-    width: 370px;
-    height: 200px;
-    object-fit: cover; /* Makes sure the image fills the box and crops excess */
-    border-radius: 20px; /* Match the parent's border-radius */
+
+.text-1, .text-2 {
+    color: #333333;
+    font-family: "Palanquin", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 2;
+    flex: 2;
+    text-align: justify;
+    min-width: 500px;
 }
-.text-1 {
-    color: #000;
-    font-size: px;
-    font-weight: px;
-    /* margin-left: 30px; */
-    margin-top: 30px;
+
+.text-1{
+    margin-top: 8%;
 }
-/* ... */
-.student {
-    margin-left: 10px;
+
+.text-2{
+    margin-top: 10%;
 }
-.student:hover {
-    text-decoration: underline;
-    text-decoration-color:#1877F2;
-    text-decoration-thickness: 2px;
+
+/* Tablet breakpoint */
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 56px;
+        margin: 0 0 40px 20px;
+    }
+    
+    .bootcamp, .student {
+        font-size: 28px;
+        margin-left: 20px;
+    }
+    
+    .block-1, .block-2 {
+        margin: 0 20px;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .pic-1, .pic-2 {
+        width: 350px;
+        height: auto;
+        flex-shrink: 0;
+    }
+    
+    .pic-1 img, .pic-2 img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+    }
+    
+    .text-1, .text-2 {
+        font-size: 16px;
+        flex: 1;
+        min-width: 300px;
+        margin-top: 0;
+    }
+    
+    .text-1 {
+        margin-top: 5%;
+    }
+    
+    .text-2 {
+        margin-top: 7%;
+    }
 }
-.section-2 {
-    margin-top: 20px;
+
+/* Mobile tablet breakpoint */
+@media (max-width: 768px) {
+    body {
+        padding: 2rem 1rem;
+    }
+    
+    h1 {
+        font-size: 48px;
+        text-align: center;
+        margin: 0 0 30px 0;
+        text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .bootcamp, .student {
+        font-size: 24px;
+        margin-left: 30px;
+        text-align: left;
+    }
+    
+    .block-1, .block-2 {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 10px;
+        gap: 20px;
+    }
+    
+    .pic-1, .pic-2 {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+    }
+    
+    .pic-1 img, .pic-2 img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+    }
+    
+    .text-1, .text-2 {
+        font-size: 15px;
+        text-align: left;
+        margin-top: 0;
+        margin-left: 6%;
+        min-width: auto;
+        width: 100%;
+    }
 }
-.block-2 {
-    display: flex;
-    gap: 30px;
-    /* margin-top: 20px; */
-}
-.pic-2 {
-    background-color: #4985d4;
-    width: 370px;
-    height: 200px;
-    box-sizing: border-box;
-    border-radius: 20px;
-}
-.pic-2 img {
-    width: 370px;
-    height: 200px;
-    object-fit: cover; /* Makes sure the image fills the box and crops excess */
-    border-radius: 20px; /* Match the parent's border-radius */
-}
-.text-2 {
-    color: #000;
-    font-size: px;
-    font-weight: px;
-    /* margin-left: 30px; */
-    margin-top: 30px;
+
+/* Mobile breakpoint */
+@media (max-width: 480px) {
+    body {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    h1 {
+        font-size: 36px;
+        margin: 0 0 70px 0;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .bootcamp, .student {
+        font-size: 20px;
+        margin-left: 10%;
+        margin-bottom: -18px;
+    }
+    
+    .block-1, .block-2 {
+        margin: 0 5px;
+        gap: 15px;
+    }
+    
+    .pic-1, .pic-2 {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+    }
+    
+    .pic-1 img, .pic-2 img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+    }
+    
+    .text-1, .text-2 {
+        font-size: 14px;
+        line-height: 1.8;
+        margin-top: 1%;
+        min-width: auto;
+        width: 84%;
+    }
 }

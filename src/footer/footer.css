@@ -1,0 +1,244 @@
+/* Basic body styling for context */
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* This makes sure the footer sticks to the bottom */
+main {
+    flex: 1;
+}
+
+/* Footer Styling */
+footer {
+    width: 100%;
+    color: white;
+}
+
+.footer-main {
+    background-color: #000000;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 50px 20px;
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+    gap: 30px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 250px; /* Increased min-width for better mobile display */
+    max-width: 400px; /* Prevents columns from getting too wide */
+    padding: 0 20px;
+}
+
+/* Column 1: Logo and Tagline */
+.logo-placeholder {
+    width: 150px;
+    height: 50px;
+    color: #00a0d2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+img{
+    width: 70px;
+}
+
+.tagline {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+    margin-left: 30px;
+    margin-top: 1px;
+    color: #ffffff;
+}
+
+#x{
+    margin-left: 50px; /* Reduced margin for better mobile responsiveness */
+}
+
+@media (max-width: 768px) {
+    #x {
+        margin-left: 0; /* Remove left margin on mobile */
+    }
+}
+
+/* Column 2: Navigation Links */
+.footer-column nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column nav li {
+    margin-bottom: 12px;
+}
+
+.footer-column nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer-column nav a:hover {
+    color: #00a0d2;
+}
+
+/* Adds the ">" before each link */
+.footer-column nav a::before {
+    content: '> ';
+    color: #00a0d2;
+    margin-right: 8px;
+}
+
+/* Column 3: Social Media */
+.follow-us {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow icons to wrap on very small screens */
+}
+
+/* Updated social icon styling for FontAwesome */
+.social-icon {
+    width: 45px;
+    height: 45px;
+    border: 2px solid white;
+    border-radius: 8px; /* More rounded corners for modern look */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: white;
+    color: #000000;
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Specific hover colors for each platform */
+.social-icon:hover .fa-instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.social-icon:hover .fa-twitter {
+    color: #1da1f2;
+}
+
+.social-icon:hover .fa-linkedin {
+    color: #0077b5;
+}
+
+/* Remove old icon-placeholder styles */
+.icon-placeholder {
+    display: none;
+}
+
+
+/* Copyright Bar */
+.footer-copyright {
+    background-color: #ffffff;
+    color: #00a0d2;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+}
+
+.footer-copyright p {
+    margin: 0;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    .footer-main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 40px 20px;
+        gap: 40px;
+    }
+
+    .footer-column {
+        min-width: 100%;
+        padding: 0 10px;
+    }
+
+    .social-icons {
+        justify-content: center;
+        gap: 25px;
+    }
+    
+    .tagline {
+        margin-left: 0;
+        text-align: center;
+    }
+}
+
+/* Additional responsive breakpoints */
+@media (max-width: 480px) {
+    .footer-main {
+        padding: 30px 15px;
+        gap: 30px;
+    }
+
+    .footer-column {
+        padding: 0 5px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .social-icons {
+        gap: 15px;
+    }
+
+    .footer-column nav a {
+        font-size: 0.95rem;
+    }
+
+    .follow-us {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .footer-main {
+        padding: 25px 10px;
+    }
+    
+    .social-icons {
+        gap: 12px;
+    }
+    
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}

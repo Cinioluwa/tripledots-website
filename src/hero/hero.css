@@ -1,0 +1,441 @@
+@import url('https://fonts.googleapis.com/css2?family=Palanquin:wght@400;500;600;700&family=Palanquin+Dark:wght@400;500;600;700&display=swap');
+
+
+:root {
+    --primary-blue: #1e2451;
+    --highlight-blue: #4BACDD;
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --card-bg: rgba(217, 217, 217, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Palanquin', sans-serif;
+    background-color: #f4f4f4;
+    color: var(--text-light);
+}
+
+/* --- Header / Navigation --- */
+.main-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(30, 37, 81, 0.66);
+    padding: 1rem 5%;
+    height: 151px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 150px;
+    height: 150px;
+    margin-top: -6px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 26px;
+    padding-bottom: 5px;
+    position: relative;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--highlight-blue);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 1024px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5%;
+    text-align: left;
+    overflow: hidden;
+    
+    /* Background image will be set by JS */
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+}
+
+/* Dark overlay to match Figma design */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(9, 9, 9, 0.76);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    margin-top: 80px; /* Offset for header */
+    gap: 100px;
+}
+
+.hero-left {
+    max-width: 660px;
+    flex: 1;
+}
+
+.hero-left h1 {
+    font-family: "Palanquin Dark", Arial;
+    font-size: 64px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    line-height: 1.1;
+}
+
+.tagline-container {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.hero-left .tagline {
+    font-size: 32px;
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+    color: var(--text-light);
+    display: inline-block;
+}
+
+.tagline-underline {
+    position: absolute;
+    bottom: -15px;
+    left: 80px;
+    width: 450px;
+    height: auto;
+    transform: rotate(-2deg);
+    z-index: -1;
+}
+
+/* Remove the old CSS underline */
+.hero-left .tagline::after {
+    display: none;
+}
+
+.hero-left p {
+    font-size: 32px;
+    line-height: 1.4;
+    margin-top: 30px;
+    max-width: 435px;
+    color: var(--text-light);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.hero-buttons {
+    margin-top: 40px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.btn {
+    padding: 18px 40px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 314px;
+    height: 72px;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--text-light);
+    color: var(--text-dark);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--text-light);
+    color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* --- Testimonial Carousel --- */
+.hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-card {
+    background-color: var(--card-bg);
+    border: 13px black solid;
+    border-radius: 25px;
+    padding: 2.5rem 2rem;
+    width: 428px;
+    min-height: 433px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.testimonial-card.fade-out {
+    opacity: 0;
+}
+
+.testimonial-profile {
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-text {
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-light);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    line-height: 1.4;
+    max-width: 303px;
+}
+
+/* --- Bottom Content --- */
+.hero-bottom-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    padding: 0 20px;
+}
+
+.learning-types {
+    text-align: center;
+    font-size: 26px;
+    font-family: 'Palanquin', sans-serif;
+    font-weight: 400;
+    letter-spacing: 16px;
+    text-transform: none;
+    color: var(--text-light);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .hero-content {
+        gap: 50px;
+        padding: 0 20px;
+    }
+    
+    .testimonial-card {
+        width: 350px;
+        min-height: 380px;
+    }
+    
+    .hero-left h1 {
+        font-size: 48px;
+    }
+    
+    .hero-left p {
+        font-size: 21px;
+    }
+    
+    .hero-left .tagline {
+        font-size: 28px;
+    }
+    
+    .hero-left .tagline::after {
+        display: none;
+    }
+    
+    .tagline-underline {
+        width: 350px;
+        left: 60px;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding-top: 40px;
+    }
+    
+    .hero-left {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-left p {
+        max-width: 80%;
+    }
+    
+    .hero-left h1 {
+        font-size: 40px;
+    }
+    
+    .hero-left .tagline::after {
+        display: none;
+    }
+    
+    .tagline-underline {
+        left: 20px;
+        width: 280px;
+    }
+    
+    .hero-right {
+        margin-top: 2rem;
+    }
+    
+    .hero-bottom-content {
+        justify-content: center;
+    }
+    
+    .learning-types {
+        order: 1;
+    }
+    
+    .nav-links {
+        display: none; /* Simple hide for mobile, can be replaced with hamburger menu */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        padding: 0.5rem 5%;
+        height: 120px;
+    }
+    
+    .logo-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .logo {
+        font-size: 1.4rem;
+    }
+    
+    .hero-left h1 {
+        font-size: 32px;
+    }
+    
+    .hero-left .tagline {
+        font-size: 24px;
+    }
+    
+    .hero-left p {
+        font-size: 20px;
+    }
+    
+    .btn {
+        font-size: 16px;
+        width: 280px;
+        height: 60px;
+        padding: 16px 32px;
+    }
+    
+    .btn-secondary {
+        margin-left: 0;
+        margin-top: 0;
+    }
+    
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .learning-types {
+        font-size: 18px;
+        letter-spacing: 8px;
+    }
+    
+    .testimonial-card {
+        width: 320px;
+        min-height: 350px;
+        padding: 2rem 1.5rem;
+    }
+    
+    .testimonial-text {
+        font-size: 18px;
+    }
+}
