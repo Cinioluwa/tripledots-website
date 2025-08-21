@@ -187,9 +187,8 @@ Copyright © 2025 Tripledots Technologies. All rights reserved.
 
 ## 👥 Development Team
 
-- **Lead Developer**: [Your Name]
-- **UI/UX Design**: Tripledots Design Team
-- **Content**: Tripledots Marketing Team
+- **Project Lead**: Covenant Adeogo
+- **Content**: Tripledots Team
 
 ## 📞 Support
 
