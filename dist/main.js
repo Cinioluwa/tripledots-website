@@ -191,6 +191,12 @@ class TripleDotsWebsite {
                     text: '"The entrepreneurship mindset they teach alongside the technical skills is gold. I built my first SaaS product during the program and launched it 2 months after graduation. It\'s now generating ₦500K monthly revenue with clients across West Africa."',
                     name: 'Victory',
                     track: 'Web Development'
+                },
+                {
+                    image: './assets/maryam.jpg',
+                    text: '"I had the theory from school, but Tripledots gave me the practical skills. Now I bridge academic knowledge with real-world computer networking and cybersecurity solutions. The hands-on experience transformed me from student to professional."',
+                    name: 'Maryam Omowumi Adebayo',
+                    track: 'Network Security Engineering'
                 }
             ];
             let currentTestimonialIndex = 0;
@@ -713,6 +719,7 @@ class TripleDotsWebsite {
             './assets/esther.jpg',
             './assets/habib.jpg',
             './assets/mj.jpg',
+            './assets/maryam.jpg',
             './assets/victory.jpg'
         ];
 
