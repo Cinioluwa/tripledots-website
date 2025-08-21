@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Tripledots Technologies - Empowering innovations through tech</title>
 
     <!-- Meta Description for SEO -->
@@ -16,9 +16,34 @@
     <meta property="og:image" content="https://i.imgur.com/I0aPDL4.jpg">
     <meta property="og:url" content="https://tripledotstechnologies.com">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Tripledots Technologies">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@tripledotstech">
+    <meta name="twitter:title" content="Tripledots Technologies - Empowering innovations through tech">
+    <meta name="twitter:description" content="Transform your career with cutting-edge tech training in Nigeria. Python, Web Dev, AI/ML, Data Analysis, and more.">
+    <meta name="twitter:image" content="https://i.imgur.com/I0aPDL4.jpg">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="general">
 
     <!-- Asset Links -->
     <link rel="icon" href="./assets/favicon.ico">
+    
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//www.google.com">
+    
+    <!-- Preload critical images early to ensure they are available when needed -->
+    <link rel="preload" href="./assets/tripledots_logo.png" as="image">
+    <link rel="preload" href="./assets/bj.jpg" as="image">
+    <link rel="preload" href="./assets/pic1.png" as="image">
+    <link rel="preload" href="./assets/underline.svg" as="image">
     
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +58,34 @@
     <!-- Stylesheet Links -->
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./scroll-effects.css">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Tripledots Technologies",
+        "description": "Empowering individuals and businesses with cutting-edge training, software solutions, and innovative technology services.",
+        "url": "https://tripledotstechnologies.com",
+        "logo": "https://tripledotstechnologies.com/assets/tripledots_logo.png",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "11 Alanode Oyepemi St, behind NECO",
+            "addressLocality": "Osogbo",
+            "addressRegion": "Osun State",
+            "addressCountry": "Nigeria"
+        },
+        "telephone": ["08066980015", "08064211425"],
+        "email": "info@tripledotstechnologies.com",
+        "sameAs": [
+            "https://www.instagram.com/tripledotstech/",
+            "https://twitter.com/tripledotstech",
+            "https://www.linkedin.com/company/tripledots-technologies/"
+        ],
+        "courseMode": ["Physical", "Virtual", "Hybrid"],
+        "educationalCredentialAwarded": "Certificate"
+    }
+    </script>
 
 </head>
 <body>
@@ -98,6 +151,10 @@
                         <p class="testimonial-text" id="testimonial-text">
                             "Tripledots has helped me develop real world skills in..."
                         </p>
+                        <div class="testimonial-author">
+                            <div class="author-name" id="testimonial-name">BJ Oladele</div>
+                            <div class="author-track" id="testimonial-track">Web Development</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,10 +174,10 @@
                 between ambition and achievement.
                 </p>
                 <div class="img">
-                    <div class="image-container">
+                    <div class="image-container about-image-entrance">
                         <img src="./assets/aboutus1.png" alt="Tripledots Technologies team photo 1">
                     </div>
-                    <div class="image-container">
+                    <div class="image-container about-image-entrance">
                         <img src="./assets/aboutus2.png" alt="Tripledots Technologies team photo 2">
                     </div>
                 </div>
