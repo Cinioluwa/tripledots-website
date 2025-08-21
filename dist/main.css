@@ -592,6 +592,8 @@ main {
     border-left: 5px solid var(--primary-blue);
     z-index: 2;
     transition: var(--transition-smooth);
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 0.5s;
 }
 
 .image-container::after {
@@ -605,6 +607,8 @@ main {
     border-right: 5px solid var(--primary-blue);
     z-index: 2;
     transition: var(--transition-smooth);
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 1s;
 }
 
 .image-container:hover::before,
