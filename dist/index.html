@@ -3,55 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tripledots - Official Website</title>
+    <title>Tripledots Technologies - Empowering innovations th    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-column footer-logo-column">
+                <div class="logo-placeholder">
+                    <img src="./assets/tripledots_logo.png" alt="Tripledots Technologies Logo">
+                </div>
+                <p class="tagline">Experience more...</p>
+            </div>
+            <div class="footer-column">
+                <nav>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer-column">
+                <p class="follow-us">Follow us on:</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/tripledotstech/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Follow us on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com/tripledotstech" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Follow us on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/tripledots-technologies/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Follow us on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2025 Tripledots Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="./main.js"></script>
+</body>
+</html>h</title>
+
+    <!-- Meta Description for SEO -->
+    <meta name="description" content="Tripledots Technologies offers cutting-edge training, software solutions, and innovative technology services. Learn Python, Web Development, Data Analysis, Machine Learning, and more.">
+    <meta name="keywords" content="technology training, coding bootcamp, python programming, web development, data analysis, machine learning, cybersecurity, Nigeria tech education">
+    <meta name="author" content="Tripledots Technologies">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Tripledots Technologies - Empowering innovations through tech">
+    <meta property="og:description" content="We empower individuals and businesses with cutting-edge training, software solutions, and innovative technology services.">
+    <meta property="og:image" content="./assets/tripledots_logo.png">
+    <meta property="og:url" content="https://tripledotstechnologies.com">
+    <meta property="og:type" content="website">
 
     <!-- Asset Links -->
     <link rel="icon" href="./assets/favicon.ico">
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;500;600;700&family=Palanquin+Dark:wght@400;500;600;700&family=Pacifico&family=Dancing+Script&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Stylesheet Links -->
     <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./scroll-effects.css">
 
 </head>
 <body>
 
-    <!--
-      ASSEMBLY INSTRUCTIONS:
-      For each section (hero, about, etc.), copy the entire
-      content from its .html file in the `src` folder
-      and paste it inside the corresponding <section> tag below.
-    -->
-
-    <header>
-        <!-- The content from src/header/header.html will go here if you make one -->
+    <!-- Header with Navigation (from hero section) -->
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img src="./assets/tripledots_logo.png" alt="Tripledots Logo" class="logo-img">
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            
+            <!-- Mobile Hamburger Menu -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-nav-links">
+                <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+                <li><a href="#about" class="mobile-nav-link">About</a></li>
+                <li><a href="#courses" class="mobile-nav-link">Courses</a></li>
+                <li><a href="#services" class="mobile-nav-link">Services</a></li>
+                <li><a href="#contact" class="mobile-nav-link">Contact Us</a></li>
+            </ul>
+        </div>
     </header>
 
     <main>
-        <section id="hero">
-            <!-- Content from src/hero/hero.html goes here -->
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1>Tripledots Technologies</h1>
+                    <div class="tagline-container">
+                        <span class="tagline">Empowering innovations through tech...</span>
+                        <img src="./assets/underline.svg" alt="" class="tagline-underline" />
+                    </div>
+                    <p>We empower individuals and businesses with cutting-edge training, software solutions, and innovative technology services.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary">VIEW COURSES</button>
+                        <button class="btn btn-secondary">APPLY NOW</button>
+                    </div>
+                </div>
+                
+                <div class="hero-right">
+                    <div class="testimonial-card" id="testimonial-card">
+                        <div class="testimonial-profile" id="testimonial-profile">
+                            <img id="testimonial-image" src="./assets/bj.jpg" alt="Student">
+                        </div>
+                        <p class="testimonial-text" id="testimonial-text">
+                            "Tripledots has helped me develop real world skills in..."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-bottom-content">
+                <span class="learning-types">Physical &nbsp;&bull;&nbsp; Virtual &nbsp;&bull;&nbsp; Hybrid Learning</span>
+            </div>
         </section>
 
+        <!-- About Section -->
         <section id="about">
-            <!-- Content from src/about/about.html goes here -->
+            <h1>About Us</h1>
+            <div id="about-main">
+                <p>Tripledots Technologies was introduced in 2021. We have trained and 
+                    mentored multiple students across Nigeria in the technology sector 
+                    for the past 4 years. At Tripledots Technologies, we bridge the gap
+                between ambition and achievement.
+                </p>
+                <div class="img">
+                    <div class="image-container">
+                        <img src="./assets/aboutus1.png" alt="Tripledots Technologies team photo 1">
+                    </div>
+                    <div class="image-container">
+                        <img src="./assets/aboutus2.png" alt="Tripledots Technologies team photo 2">
+                    </div>
+                </div>
+            </div>
         </section>
 
+        <!-- Courses Section -->
+        <section id="courses">
+            <h1>Courses</h1>
+            <div id="courses-main">
+                <div class="card" tabindex="0">
+                    <h2 class="head">OFFICE PRODUCTIVITY</h2>
+                    <p class="write">Master essential workplace tools to boost your efficiency</p>
+                </div>
+                <div class="card" tabindex="0">
+                    <h2 class="head">PYTHON PROGRAMMING</h2>
+                    <p class="write">From basics to advanced real-world coding skills</p>
+                </div>
+                <div class="card" tabindex="0">
+                    <h2 class="head">WEB DEVELOPMENT</h2>
+                    <p class="write">Build responsive, modern websites and applications</p>
+                </div>
+                <div class="card" tabindex="0">
+                    <h2 class="head">DATA ANALYSIS</h2>
+                    <p class="write">Learn how to use Power BI, Numpy, and other data tools to understand and visualize data</p>
+                </div>
+                <div class="card" tabindex="0">
+                    <h2 class="head">NETWORKING & CYBERSEC</h2>
+                    <p class="write">Cisco Packet Tracer, GNS3, Kali. Learn how to create and protect network systems</p>
+                </div>
+                <div class="card" tabindex="0">
+                    <h2 class="head">MACHINE LEARNING</h2>
+                    <p class="write">Dive into AI and machine learning algorithms to build intelligent systems and applications</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
         <section id="services">
-            <!-- Content from src/services/services.html goes here -->
+            <h1>Our Services</h1>
+            <div id="services-main">
+                
+                <div class="section-1">
+                    <div class="bootcamp">BOOTCAMPS</div>
+                    <div class="block-1">
+                        <div class="pic-1">
+                                <div class="image-frame1">
+                                <img src="./assets/bootcamps.png" alt="Bootcamps for children">
+                                </div>
+                        </div>
+                        <div class="text-1">
+                                We organize bootcamps for children to familiarize them with
+                                technological concepts.
+                                <br>
+                                Our bootcamps provide hands-on learning experiences that inspire the next generation of innovators.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-2">
+                    <div class="student">STUDENT OPPORTUNITIES</div>
+                    <div class="block-2">
+                        <div class="pic-2">
+                                <div class="image-frame2">
+                                <img src="./assets/interns.png" alt="Student internship opportunities">
+                                </div>
+                        </div>
+                        <div class="text-2">
+                                SIWES and IT students can intern here to boost their skills.
+                                <br>
+                                We provide real-world experience and mentorship to help students bridge the gap between academia and industry.
+                        </div>
+                    </div>
+            </div>
         </section>
 
-        <section id="careers">
-            <!-- Content from src/careers/careers.html goes here -->
-        </section>
-
+        <!-- Contact Section -->
         <section id="contact">
-            <!-- Content from src/contact/contact.html goes here -->
+            <h1>Get in Touch</h1>
+            
+            <div class="middle-section">
+                <div class="desc-section">
+                    <p>Whether you're curious about our programs, need custom training, or want to collaborate we're here to help.</p>
+                </div>
+                <div class="map-section">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.3355193715674!2d4.513727980905356!3d7.754193687715872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103829e028ee0125%3A0x8dfea6cdab44119f!2sTripledots%20Technologies!5e0!3m2!1sen!2sng!4v1755077286870!5m2!1sen!2sng" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <div class="contact-info-section">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>11 Alanode Oyepemi St, behind NECO, Osogbo, Osun State, Nigeria.</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>08066980015, 08064211425</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p><a href="mailto:info@tripledotstechnologies.com">info@tripledotstechnologies.com</a></p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer id="footer">
-        <!-- Content from src/footer/footer.html goes here -->
+        <div class="footer-main">
+            <div class="footer-column" id = "x">
+                <div class="logo-placeholder">
+                    <img src="./assets/tripledots_logo.png" alt="Tripledots Technologies Logo">
+                </div>
+                <p class="tagline">Experience more...</p>
+            </div>
+            <div class="footer-column">
+                <nav>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer-column">
+                <p class="follow-us">Follow us on:</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/tripledotstech/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com/tripledotstech" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/tripledots-technologies/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2025 Tripledots Technologies. All rights reserved.</p>
+        </div>
     </footer>
 
     <!-- Main JavaScript File -->
+    <script src="./scroll-effects.js"></script>
     <script src="./main.js"></script>
 </body>
 </html>
