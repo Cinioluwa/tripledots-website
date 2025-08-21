@@ -102,10 +102,19 @@ class ScrollEffectsManager {
             card.classList.remove('magnetic-element');
         });
 
-        // Add floating animation to images
-        const images = document.querySelectorAll('.image-container img, .testimonial-profile img');
+        // Add floating animation to images (but not about images)
+        const images = document.querySelectorAll('.testimonial-profile img');
         images.forEach(img => {
             img.classList.add('floating-element');
+        });
+
+        // Ensure about images have entrance reveal class but remove floating
+        const aboutImages = document.querySelectorAll('.about-image-entrance');
+        aboutImages.forEach(el => {
+            if (!el.classList.contains('scroll-reveal')) el.classList.add('scroll-reveal');
+            // Remove floating-element if it was added to avoid sway
+            const img = el.querySelector('img');
+            if (img) img.classList.remove('floating-element');
         });
 
         // Add magnetic effect to buttons and cards (excluding course cards)
@@ -386,76 +395,218 @@ class ScrollEffectsManager {
         loader.className = 'page-loader';
         loader.innerHTML = `
             <div class="loader-content">
-                <div class="loader-spinner" id="progress-spinner"></div>
-                <h3 class="loader-title">Welcome to Tripledots</h3>
-                <p class="loader-subtitle">Technologies</p>
+                <div class="loader-logo-container">
+                    <div class="loader-logo-pulse"></div>
+                    <img src="./assets/tripledots_logo.png" alt="Tripledots Logo" class="loader-logo" />
+                </div>
+                <div class="loader-text-container">
+                    <h2 class="loader-title" id="loader-title">Initializing Innovation...</h2>
+                    <div class="loader-taglines" id="loader-taglines">
+                        <p class="loader-tagline active">Empowering the next generation of tech leaders</p>
+                        <p class="loader-tagline">Where ambition meets opportunity</p>
+                        <p class="loader-tagline">Building Nigeria's tech future, one student at a time</p>
+                        <p class="loader-tagline">Transform your career. Transform your life.</p>
+                    </div>
+                    <div class="loader-progress-container">
+                        <div class="loader-progress-bar">
+                            <div class="loader-progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="loader-percentage" id="loader-percentage">0%</div>
+                    </div>
+                </div>
+                <div class="loader-floating-elements">
+                    <div class="floating-code">{ }</div>
+                    <div class="floating-code">&lt;/&gt;</div>
+                    <div class="floating-code">AI</div>
+                    <div class="floating-code">ML</div>
+                    <div class="floating-code">{ }</div>
+                    <div class="floating-code">Web</div>
+                </div>
             </div>
         `;
         document.body.appendChild(loader);
+        
+        // Start engaging animations
+        this.startLoaderAnimations();
         
         // Track actual loading progress
         this.trackLoadingProgress(loader);
     }
 
-    trackLoadingProgress(loader) {
-        let assetsLoaded = 0;
-        let totalAssets = 0;
+    startLoaderAnimations() {
+        // Animate taglines
+        const taglines = document.querySelectorAll('.loader-tagline');
+        let currentTagline = 0;
         
-        // Count all images, scripts, and stylesheets
-        const images = document.querySelectorAll('img');
-        const scripts = document.querySelectorAll('script[src]');
-        const stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
-        
-        totalAssets = images.length + scripts.length + stylesheets.length;
-        
-        const updateProgress = () => {
-            assetsLoaded++;
-            const progress = Math.min((assetsLoaded / totalAssets) * 100, 100);
-            this.updateSpinnerProgress(progress);
+        const rotateTaglines = () => {
+            if (taglines.length === 0) return;
             
-            if (assetsLoaded >= totalAssets) {
-                // All assets loaded, wait for smooth completion
-                setTimeout(() => {
-                    loader.classList.add('hidden');
-                    this.startEntranceAnimations();
-                }, 300);
-            }
+            taglines[currentTagline].classList.remove('active');
+            currentTagline = (currentTagline + 1) % taglines.length;
+            taglines[currentTagline].classList.add('active');
         };
-
-        // Track image loading
-        images.forEach(img => {
-            if (img.complete) {
-                updateProgress();
-            } else {
-                img.addEventListener('load', updateProgress);
-                img.addEventListener('error', updateProgress); // Count errors as loaded
-            }
-        });
-
-        // Track script loading
-        scripts.forEach(script => {
-            script.addEventListener('load', updateProgress);
-            script.addEventListener('error', updateProgress);
-        });
-
-        // Track stylesheet loading
-        stylesheets.forEach(link => {
-            link.addEventListener('load', updateProgress);
-            link.addEventListener('error', updateProgress);
-        });
-
-        // Fallback - ensure loader disappears even if tracking fails
-        setTimeout(() => {
-            if (!loader.classList.contains('hidden')) {
-                loader.classList.add('hidden');
-                this.startEntranceAnimations();
-            }
-        }, 4000);
+        
+        const taglineInterval = setInterval(rotateTaglines, 2000);
+        
+        // Animate title text
+        const title = document.getElementById('loader-title');
+        if (title) {
+            const titles = [
+                'Initializing Innovation...',
+                'Loading Excellence...',
+                'Preparing Your Future...',
+                'Connecting Possibilities...'
+            ];
+            let titleIndex = 0;
+            
+            const rotateTitle = () => {
+                title.style.opacity = '0';
+                setTimeout(() => {
+                    titleIndex = (titleIndex + 1) % titles.length;
+                    title.textContent = titles[titleIndex];
+                    title.style.opacity = '1';
+                }, 300);
+            };
+            
+            const titleInterval = setInterval(rotateTitle, 3000);
+            
+            // Store intervals for cleanup
+            this.loaderIntervals = [taglineInterval, titleInterval];
+        }
     }
 
-    updateSpinnerProgress(progress) {
-        const spinner = document.querySelector('#progress-spinner::before');
-        // Progress is handled by CSS animation duration sync
+    trackLoadingProgress(loader) {
+        // Create a realistic and engaging progress experience that always reaches 100%
+        let currentProgress = 0;
+        let targetProgress = 0;
+        
+        // Define realistic loading phases with messages
+        const loadingPhases = [
+            { target: 15, duration: 400, label: 'Loading core assets...' },
+            { target: 35, duration: 500, label: 'Initializing components...' },
+            { target: 55, duration: 400, label: 'Loading testimonials...' },
+            { target: 75, duration: 300, label: 'Preparing interface...' },
+            { target: 90, duration: 250, label: 'Almost ready...' },
+            { target: 100, duration: 200, label: 'Welcome! 🚀' }
+        ];
+        
+        let currentPhase = 0;
+        
+        // Smooth progress animation with realistic increments
+        const animateProgress = () => {
+            if (currentProgress < targetProgress) {
+                // Random increment for realistic feel
+                const increment = Math.random() * 3 + 0.5;
+                currentProgress = Math.min(currentProgress + increment, targetProgress);
+                
+                this.updateLoaderProgress(currentProgress);
+                requestAnimationFrame(animateProgress);
+            } else if (currentPhase < loadingPhases.length - 1) {
+                // Move to next phase after delay
+                setTimeout(() => {
+                    currentPhase++;
+                    if (currentPhase < loadingPhases.length) {
+                        targetProgress = loadingPhases[currentPhase].target;
+                        this.updateLoaderPhase(loadingPhases[currentPhase].label);
+                        animateProgress();
+                    }
+                }, loadingPhases[currentPhase].duration);
+            } else if (currentProgress >= 100) {
+                // Ensure we actually hit 100% and then hide loader
+                this.updateLoaderProgress(100);
+                setTimeout(() => {
+                    if (!loader.classList.contains('hidden')) {
+                        loader.classList.add('hidden');
+                        this.startEntranceAnimations();
+                        
+                        // Clean up intervals
+                        if (this.loaderIntervals) {
+                            this.loaderIntervals.forEach(interval => clearInterval(interval));
+                        }
+                    }
+                }, 600);
+            }
+        };
+        
+        // Start loading sequence
+        targetProgress = loadingPhases[0].target;
+        this.updateLoaderPhase(loadingPhases[0].label);
+        
+        // Small initial delay for smoother experience
+        setTimeout(() => {
+            animateProgress();
+        }, 300);
+        
+        // Also track real assets in background for faster loading on good connections
+        this.trackRealAssets();
+    }
+    
+    trackRealAssets() {
+        // Track actual assets but don't block progress
+        const images = Array.from(document.images).filter(img => 
+            img.loading !== 'lazy' && 
+            !img.complete && 
+            img.src
+        );
+        
+        let assetsLoaded = 0;
+        const totalAssets = images.length;
+        
+        if (totalAssets === 0) return; // No assets to track
+        
+        images.forEach(img => {
+            const checkLoaded = () => {
+                assetsLoaded++;
+                if (assetsLoaded >= totalAssets * 0.7) { // 70% of images loaded
+                    // Speed up our fake progress slightly
+                    const progressFill = document.getElementById('progress-fill');
+                    if (progressFill && parseInt(progressFill.style.width) < 60) {
+                        // Small boost if we're still early in loading
+                        this.updateLoaderProgress(Math.min(parseInt(progressFill.style.width) + 10, 60));
+                    }
+                }
+            };
+            
+            if (img.complete) {
+                checkLoaded();
+            } else {
+                img.addEventListener('load', checkLoaded);
+                img.addEventListener('error', checkLoaded); // Count errors too
+            }
+        });
+    }
+
+    updateLoaderProgress(progress) {
+        const progressFill = document.getElementById('progress-fill');
+        const percentageText = document.getElementById('loader-percentage');
+        
+        if (progressFill) {
+            progressFill.style.width = `${progress}%`;
+        }
+        
+        if (percentageText) {
+            percentageText.textContent = `${Math.round(progress)}%`;
+        }
+        
+        // Add excitement when we're close to completion
+        if (progress >= 90) {
+            const title = document.getElementById('loader-title');
+            if (title && !title.classList.contains('almost-ready')) {
+                title.classList.add('almost-ready');
+                title.textContent = 'Almost Ready! 🚀';
+            }
+        }
+    }
+
+    updateLoaderPhase(message) {
+        const title = document.getElementById('loader-title');
+        if (title && !title.classList.contains('almost-ready')) {
+            title.style.opacity = '0.7';
+            setTimeout(() => {
+                title.textContent = message;
+                title.style.opacity = '1';
+            }, 200);
+        }
     }
 
     startEntranceAnimations() {
@@ -565,6 +716,11 @@ class ScrollEffectsManager {
     destroy() {
         if (this.revealObserver) {
             this.revealObserver.disconnect();
+        }
+        
+        // Clear loader intervals
+        if (this.loaderIntervals) {
+            this.loaderIntervals.forEach(interval => clearInterval(interval));
         }
         
         // Remove event listeners and cleanup

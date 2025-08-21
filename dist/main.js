@@ -52,70 +52,145 @@ class TripleDotsWebsite {
         const heroSection = document.getElementById('hero');
         if (!heroSection) return;
 
-        // Background Image Carousel
-        const backgroundImages = [
-            './assets/pic1.png',
-            'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
-            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
-            'https://images.unsplash.com/photo-1600880292210-f76c9b0559a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
-            'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1772&q=80'
+        // Background carousel (supports images and videos). Videos are muted and autoplayed.
+        const backgroundItems = [
+            { type: 'image', src: './assets/justdoit.png' },
+            { type: 'image', src: './assets/pic1.png' },
+            { type: 'image', src: './assets/b2.jpg' },
+            { type: 'image', src: './assets/b3.jpg' },
+            { type: 'image', src: './assets/b1.jpg' },
+            { type: 'video', src: './assets/b4.webm' },
+            { type: 'image', src: './assets/lightbulb.png' },
+            { type: 'image', src: './assets/b6.png' },
+            { type: 'video', src: './assets/b5.webm' }
         ];
-        let currentBgIndex = 0;
 
-        const changeBackground = () => {
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                currentBgIndex = (currentBgIndex + 1) % backgroundImages.length;
-                heroSection.style.backgroundImage = `url('${backgroundImages[currentBgIndex]}')`;
-            }
+        let currentBgIndex = 0;
+        // Setup a hero-bg-media container for layering items and crossfading
+        let bgContainer = document.querySelector('.hero-bg-media');
+        if (!bgContainer) {
+            bgContainer = document.createElement('div');
+            bgContainer.className = 'hero-bg-media';
+            heroSection.insertBefore(bgContainer, heroSection.firstChild);
+        }
+
+        // Pool for video elements to avoid re-creating them each time (reduces playback lag)
+        const videoPool = {};
+
+        const createOrGetVideo = (src) => {
+            if (videoPool[src]) return videoPool[src];
+            const v = document.createElement('video');
+            v.src = src;
+            v.muted = true;
+            v.loop = true;
+            v.playsInline = true;
+            v.preload = 'auto';
+            v.className = 'bg-video';
+            v.style.zIndex = '-2';
+            videoPool[src] = v;
+            return v;
         };
 
-        // Preload images for smoother transitions
-        backgroundImages.forEach((src, index) => {
-            const img = new Image();
-            img.onerror = () => {
-                console.warn(`Failed to load background image ${index + 1}: ${src}`);
-                backgroundImages.splice(index, 1);
-            };
-            img.src = src;
+        const showItem = (item) => {
+            // Add new bg element for item
+            let el;
+            if (item.type === 'video') {
+                el = createOrGetVideo(item.src);
+                if (!el.parentNode) bgContainer.appendChild(el);
+                // ensure play started
+                const p = el.play();
+                if (p && typeof p.then === 'function') p.catch(() => {});
+            } else {
+                el = document.createElement('div');
+                el.className = 'bg-item';
+                el.style.backgroundImage = `url('${item.src}')`;
+                bgContainer.appendChild(el);
+            }
+
+            // Force a layout & then make visible to trigger transition
+            void el.offsetWidth;
+            el.classList.add('visible');
+
+            // Remove previous non-active items after crossfade duration (1s)
+            Array.from(bgContainer.children).forEach(child => {
+                if (child === el) return;
+                child.classList.remove('visible');
+                setTimeout(() => {
+                    // only remove if still not visible
+                    if (!child.classList.contains('visible') && child.parentNode) child.remove();
+                }, 1100);
+            });
+        };
+
+        // Preload image items only (videos will buffer by the browser)
+        backgroundItems.forEach((it, idx) => {
+            if (it.type === 'image') {
+                const img = new Image();
+                try { img.crossOrigin = 'anonymous'; } catch (e) {}
+                img.onerror = () => {
+                    console.warn(`Failed to load background image ${idx + 1}: ${it.src}`);
+                    backgroundItems.splice(idx, 1);
+                };
+                img.src = it.src;
+            }
         });
-        
-        // Set initial background
-        if (backgroundImages.length > 0) {
-            heroSection.style.backgroundImage = `url('${backgroundImages[0]}')`;
-            // Change background every 8 seconds
-            setInterval(changeBackground, 8000);
+
+        if (backgroundItems.length > 0) {
+            showItem(backgroundItems[0]);
+            // Change background every 10 seconds (gives videos time to buffer)
+            setInterval(() => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                currentBgIndex = (currentBgIndex + 1) % backgroundItems.length;
+                showItem(backgroundItems[currentBgIndex]);
+            }, 10000);
         }
 
         // Testimonial Carousel
         const testimonialCard = document.getElementById('testimonial-card');
         const testimonialImageEl = document.getElementById('testimonial-image');
         const testimonialTextEl = document.getElementById('testimonial-text');
+        const testimonialNameEl = document.getElementById('testimonial-name');
+        const testimonialTrackEl = document.getElementById('testimonial-track');
 
-        if (testimonialCard && testimonialImageEl && testimonialTextEl) {
+        if (testimonialCard && testimonialImageEl && testimonialTextEl && testimonialNameEl && testimonialTrackEl) {
+            // Ensure the img element requests CORS for external sources
+            try { testimonialImageEl.crossOrigin = 'anonymous'; } catch (e) {}
             const testimonials = [
                 {
                     image: './assets/bj.jpg',
-                    text: '"Tripledots has helped me develop real world skills in web development and changed my career path completely."'
+                    text: '"I was working in retail for 3 years and felt stuck. After completing the web development program at Tripledots, I got my first developer job at a fintech startup in Lagos. The hands-on projects and portfolio we built made all the difference during interviews."',
+                    name: 'Bolaji',
+                    track: 'Web Development Graduate'
                 },
                 {
                     image: './assets/dora.jpg',
-                    text: '"The data science bootcamp was intensive but incredibly rewarding. I landed my dream job in tech right after graduation."'
+                    text: '"Coming from a biology background, I never thought I\'d understand machine learning. The instructors broke down complex concepts so well. Now I\'m a data scientist at an oil & gas company, building predictive models that actually impact business decisions."',
+                    name: 'Isidora Obeahon',
+                    track: 'AI/ML & Python'
                 },
                 {
                     image: './assets/esther.jpg',
-                    text: '"Amazing instructors and hands-on projects. Tripledots prepared me for the real challenges in the tech industry."'
+                    text: '"What impressed me most wasn\'t just the coding - it was learning how to think like a developer. The debugging sessions, code reviews, and real client projects prepared me for the chaos of startup life. I\'m now a full-stack developer at a growing tech company."',
+                    name: 'Esther Owolabi',
+                    track: 'Web Development'
                 },
                 {
                     image: './assets/habib.jpg',
-                    text: '"The corporate training program transformed our entire development team. Highly recommended for businesses!"'
+                    text: '"Our company had security vulnerabilities we couldn\'t identify. After our IT team went through Tripledots\' cybersecurity training, we discovered and fixed 15 critical issues. The ROI was immediate - we prevented what could have been a costly breach."',
+                    name: 'Habib',
+                    track: 'Networking & Cybersecurity'
                 },
                 {
                     image: './assets/mj.jpg',
-                    text: '"From zero coding knowledge to landing my first software engineering role. Tripledots made it possible."'
+                    text: '"I was manually creating reports for hours every week. Learning Python and Power BI at Tripledots changed everything. Now I automate those reports in minutes and focus on actual analysis. My manager promoted me to Lead Analyst within 6 months."',
+                    name: 'Mujeeb Adisa',
+                    track: 'Data Analysis with Python'
                 },
                 {
                     image: './assets/victory.jpg',
-                    text: '"The mentorship and practical approach at Tripledots gave me the confidence to start my own tech company."'
+                    text: '"The entrepreneurship mindset they teach alongside the technical skills is gold. I built my first SaaS product during the program and launched it 2 months after graduation. It\'s now generating ₦500K monthly revenue with clients across West Africa."',
+                    name: 'Victory',
+                    track: 'Web Development'
                 }
             ];
             let currentTestimonialIndex = 0;
@@ -125,10 +200,12 @@ class TripleDotsWebsite {
 
                 setTimeout(() => {
                     currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-                    const { image, text } = testimonials[currentTestimonialIndex];
+                    const { image, text, name, track } = testimonials[currentTestimonialIndex];
                     
                     testimonialImageEl.src = image;
                     testimonialTextEl.textContent = text;
+                    testimonialNameEl.textContent = name;
+                    testimonialTrackEl.textContent = track;
                     
                     testimonialCard.classList.remove('fade-out');
                 }, 500);
@@ -142,10 +219,12 @@ class TripleDotsWebsite {
             // Set initial testimonial
             testimonialImageEl.src = testimonials[0].image;
             testimonialTextEl.textContent = testimonials[0].text;
+            testimonialNameEl.textContent = testimonials[0].name;
+            testimonialTrackEl.textContent = testimonials[0].track;
             
             // Change testimonial every 5 seconds (only if motion is not reduced)
             if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                setInterval(updateTestimonial, 5000);
+                setInterval(updateTestimonial, 10000);
             }
 
             // Keyboard navigation for testimonials
@@ -577,6 +656,9 @@ class TripleDotsWebsite {
         // Preload critical resources
         this.preloadCriticalResources();
         
+        // Preload testimonial images
+        this.preloadTestimonialImages();
+        
         console.log('✅ Performance Optimizations initialized');
     }
 
@@ -620,6 +702,23 @@ class TripleDotsWebsite {
             link.as = 'image';
             link.href = src;
             document.head.appendChild(link);
+        });
+    }
+
+    preloadTestimonialImages() {
+        // Preload all testimonial images for smooth transitions
+        const testimonialImages = [
+            './assets/bj.jpg',
+            './assets/dora.jpg',
+            './assets/esther.jpg',
+            './assets/habib.jpg',
+            './assets/mj.jpg',
+            './assets/victory.jpg'
+        ];
+
+        testimonialImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
         });
     }
 
@@ -755,3 +854,25 @@ if ('serviceWorker' in navigator) {
 }
 
 console.log('🎉 Tripledots Website main script loaded successfully!');
+
+// --- DEVELOPER EASTER EGG ---
+console.log(`
+    ████████╗██████╗ ██╗██████╗ ██╗     ███████╗██████╗  ██████╗ ████████╗███████╗
+    ╚══██╔══╝██╔══██╗██║██╔══██╗██║     ██╔════╝██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝
+       ██║   ██████╔╝██║██████╔╝██║     █████╗  ██║  ██║██║   ██║   ██║   ███████╗
+       ██║   ██╔══██╗██║██╔═══╝ ██║     ██╔══╝  ██║  ██║██║   ██║   ██║   ╚════██║
+       ██║   ██║  ██║██║██║     ███████╗███████╗██████╔╝╚██████╔╝   ██║   ███████║
+       ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚══════╝╚══════╝╚═════╝  ╚═════╝    ╚═╝   ╚══════╝
+    
+    👋 Hey there, fellow developer! 
+    🚀 Interested in building something amazing with us?
+    💼 Check out our courses at tripledotstechnologies.com
+    📧 Drop us a line: info@tripledotstechnologies.com
+    
+    Built with 💙 by the Tripledots Team
+`);
+
+if (navigator.userAgent.toLowerCase().includes('chrome')) {
+    console.log('%c🔥 This website was crafted with passion and cutting-edge tech!', 
+        'background: linear-gradient(45deg, #1e2451, #4BACDD); color: white; padding: 10px; border-radius: 5px; font-weight: bold;');
+}
