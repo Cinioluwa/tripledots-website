@@ -15,6 +15,9 @@ class ScrollEffectsManager {
         this.ticking = false;
         this.particles = [];
         
+        // Initialize preloader immediately to prevent flash
+        this.initPageLoader();
+        
         this.init();
     }
 
@@ -30,7 +33,7 @@ class ScrollEffectsManager {
         this.initMagneticElements();
         this.initTextWaveAnimations();
         this.initCounters();
-        this.initPageLoader();
+        // Preloader already initialized in constructor
         
         // Bind scroll events
         this.bindScrollEvents();
@@ -517,6 +520,7 @@ class ScrollEffectsManager {
                 setTimeout(() => {
                     if (!loader.classList.contains('hidden')) {
                         loader.classList.add('hidden');
+                        document.body.classList.add('loader-ready');
                         this.startEntranceAnimations();
                         
                         // Clean up intervals
