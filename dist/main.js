@@ -38,6 +38,8 @@ class TripleDotsWebsite {
         // Initialize global features
         this.initNavigation();
         this.initScrollEffects();
+        this.initScrollProgress();
+        this.initBackToTop();
         this.initAccessibility();
         this.initPerformanceOptimizations();
         
@@ -327,7 +329,7 @@ class TripleDotsWebsite {
             {
                 image: './assets/bj.jpg',
                 text: 'I was working in retail for 3 years and felt stuck. After completing the web development program at Tripledots, I got my first developer job at a fintech startup in Lagos. The hands-on projects and portfolio we built made all the difference during interviews.',
-                name: 'Bolaji Oladele',
+                name: 'BJ',
                 track: 'Web Development Graduate'
             },
             {
@@ -345,7 +347,7 @@ class TripleDotsWebsite {
             {
                 image: './assets/habib.jpg',
                 text: 'Our company had security vulnerabilities we couldn\'t identify. After our IT team went through Tripledots\' cybersecurity training, we discovered and fixed 15 critical issues. The ROI was immediate.',
-                name: 'Habib Adebayo',
+                name: 'Habib',
                 track: 'Networking & Cybersecurity'
             },
             {
@@ -357,7 +359,7 @@ class TripleDotsWebsite {
             {
                 image: './assets/victory.jpg',
                 text: 'The entrepreneurship mindset they teach alongside the technical skills is gold. I built my first SaaS product during the program and launched it 2 months after graduation.',
-                name: 'Victory Adebayo',
+                name: 'Victory',
                 track: 'Web Development'
             },
             {
@@ -682,6 +684,60 @@ class TripleDotsWebsite {
         }
     }
 
+    // --- SCROLL PROGRESS INDICATOR ---
+    initScrollProgress() {
+        console.log('Initializing Scroll Progress...');
+        
+        const progressBar = document.getElementById('scroll-progress');
+        if (!progressBar) return;
+
+        const updateScrollProgress = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            
+            progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+        };
+
+        // Throttled scroll listener for performance
+        window.addEventListener('scroll', this.throttle(updateScrollProgress, 10));
+        
+        console.log('✅ Scroll Progress initialized');
+    }
+
+    // --- BACK TO TOP BUTTON ---
+    initBackToTop() {
+        console.log('Initializing Back to Top...');
+        
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (!backToTopBtn) return;
+
+        // Show/hide based on scroll position
+        const toggleBackToTop = () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        };
+
+        // Smooth scroll to top
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Track analytics
+            this.trackEvent('back_to_top_clicked');
+        });
+
+        // Throttled scroll listener
+        window.addEventListener('scroll', this.throttle(toggleBackToTop, 100));
+        
+        console.log('✅ Back to Top initialized');
+    }
+
     // --- NAVIGATION ENHANCEMENTS ---
     initNavigation() {
         console.log('Initializing Navigation...');
@@ -811,13 +867,39 @@ class TripleDotsWebsite {
             .hero-left h1,
             .hero-left .tagline,
             .hero-left p,
-            .testimonial-card,
+            .testimonials-container,
             .card,
             .image-container,
             .contact-item
         `);
 
         elementsToObserve.forEach(el => observer.observe(el));
+
+        // Subtle parallax for hero background (only on desktop)
+        if (!this.isMobile() && window.innerWidth > 768) {
+            let ticking = false;
+            
+            const updateParallax = () => {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.hero-bg-media .bg-item, .hero-bg-media video');
+                
+                parallaxElements.forEach(element => {
+                    const speed = 0.5;
+                    element.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+                
+                ticking = false;
+            };
+            
+            const requestParallaxUpdate = () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            };
+            
+            window.addEventListener('scroll', requestParallaxUpdate);
+        }
 
         console.log('✅ Scroll Effects initialized');
     }
