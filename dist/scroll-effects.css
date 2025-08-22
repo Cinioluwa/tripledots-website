@@ -451,6 +451,27 @@ html.scroll-snap {
 }
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 1024px) {
+    /* Hide floating elements on tablets to prevent horizontal scrolling */
+    .loader-floating-elements,
+    .floating-code,
+    .floating-element,
+    .floating-element-slow {
+        display: none;
+    }
+    
+    /* Ensure preloader content stays contained */
+    .loader-content {
+        max-width: 90%;
+        padding: 0 20px;
+    }
+    
+    .loader-text-container {
+        max-width: 500px;
+        padding: 0 15px;
+    }
+}
+
 @media (max-width: 768px) {
     .scroll-reveal,
     .scroll-reveal-left,
@@ -496,6 +517,23 @@ html.scroll-snap {
     
     .floating-code {
         font-size: 1rem;
+        display: none; /* Also hide on mobile for performance */
+    }
+    
+    /* Additional mobile loader optimizations */
+    .loader-content {
+        max-width: 95%;
+        padding: 0 15px;
+    }
+    
+    .loader-text-container {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    
+    /* Ensure no horizontal overflow on small screens */
+    .page-loader {
+        overflow-x: hidden;
     }
 }
 
@@ -524,6 +562,15 @@ html.scroll-snap {
 }
 
 /* ===== SMOOTH LOADING ANIMATION ===== */
+/* Prevent flash of content before loader appears */
+body:not(.loader-ready) {
+    overflow: hidden;
+}
+
+body:not(.loader-ready) {
+    overflow-x: hidden; /* Prevent horizontal scroll during loading */
+}
+
 .page-loader {
     position: fixed;
     top: 0;
@@ -692,6 +739,7 @@ html.scroll-snap {
     height: 100%;
     pointer-events: none;
     z-index: 1;
+    overflow: hidden; /* Ensure floating elements don't cause overflow */
 }
 
 .floating-code {

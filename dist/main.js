@@ -38,6 +38,8 @@ class TripleDotsWebsite {
         // Initialize global features
         this.initNavigation();
         this.initScrollEffects();
+        this.initScrollProgress();
+        this.initBackToTop();
         this.initAccessibility();
         this.initPerformanceOptimizations();
         
@@ -145,103 +147,8 @@ class TripleDotsWebsite {
             }, 10000);
         }
 
-        // Testimonial Carousel
-        const testimonialCard = document.getElementById('testimonial-card');
-        const testimonialImageEl = document.getElementById('testimonial-image');
-        const testimonialTextEl = document.getElementById('testimonial-text');
-        const testimonialNameEl = document.getElementById('testimonial-name');
-        const testimonialTrackEl = document.getElementById('testimonial-track');
-
-        if (testimonialCard && testimonialImageEl && testimonialTextEl && testimonialNameEl && testimonialTrackEl) {
-            // Ensure the img element requests CORS for external sources
-            try { testimonialImageEl.crossOrigin = 'anonymous'; } catch (e) {}
-            const testimonials = [
-                {
-                    image: './assets/bj.jpg',
-                    text: '"I was working in retail for 3 years and felt stuck. After completing the web development program at Tripledots, I got my first developer job at a fintech startup in Lagos. The hands-on projects and portfolio we built made all the difference during interviews."',
-                    name: 'Bolaji',
-                    track: 'Web Development Graduate'
-                },
-                {
-                    image: './assets/dora.jpg',
-                    text: '"Coming from a biology background, I never thought I\'d understand machine learning. The instructors broke down complex concepts so well. Now I\'m a data scientist at an oil & gas company, building predictive models that actually impact business decisions."',
-                    name: 'Isidora Obeahon',
-                    track: 'AI/ML & Python'
-                },
-                {
-                    image: './assets/esther.jpg',
-                    text: '"What impressed me most wasn\'t just the coding - it was learning how to think like a developer. The debugging sessions, code reviews, and real client projects prepared me for the chaos of startup life. I\'m now a full-stack developer at a growing tech company."',
-                    name: 'Esther Owolabi',
-                    track: 'Web Development'
-                },
-                {
-                    image: './assets/habib.jpg',
-                    text: '"Our company had security vulnerabilities we couldn\'t identify. After our IT team went through Tripledots\' cybersecurity training, we discovered and fixed 15 critical issues. The ROI was immediate - we prevented what could have been a costly breach."',
-                    name: 'Habib',
-                    track: 'Networking & Cybersecurity'
-                },
-                {
-                    image: './assets/mj.jpg',
-                    text: '"I was manually creating reports for hours every week. Learning Python and Power BI at Tripledots changed everything. Now I automate those reports in minutes and focus on actual analysis. My manager promoted me to Lead Analyst within 6 months."',
-                    name: 'Mujeeb Adisa',
-                    track: 'Data Analysis with Python'
-                },
-                {
-                    image: './assets/victory.jpg',
-                    text: '"The entrepreneurship mindset they teach alongside the technical skills is gold. I built my first SaaS product during the program and launched it 2 months after graduation. It\'s now generating ₦500K monthly revenue with clients across West Africa."',
-                    name: 'Victory',
-                    track: 'Web Development'
-                },
-                {
-                    image: './assets/maryam.jpg',
-                    text: '"I had the theory from school, but Tripledots gave me the practical skills. Now I bridge academic knowledge with real-world computer networking and cybersecurity solutions. The hands-on experience transformed me from student to professional."',
-                    name: 'Maryam Omowumi Adebayo',
-                    track: 'Network Security Engineering'
-                }
-            ];
-            let currentTestimonialIndex = 0;
-
-            const updateTestimonial = () => {
-                testimonialCard.classList.add('fade-out');
-
-                setTimeout(() => {
-                    currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-                    const { image, text, name, track } = testimonials[currentTestimonialIndex];
-                    
-                    testimonialImageEl.src = image;
-                    testimonialTextEl.textContent = text;
-                    testimonialNameEl.textContent = name;
-                    testimonialTrackEl.textContent = track;
-                    
-                    testimonialCard.classList.remove('fade-out');
-                }, 500);
-            };
-
-            // Handle testimonial image errors
-            testimonialImageEl.onerror = () => {
-                testimonialImageEl.src = 'https://placehold.co/120x120/cccccc/666666?text=User';
-            };
-
-            // Set initial testimonial
-            testimonialImageEl.src = testimonials[0].image;
-            testimonialTextEl.textContent = testimonials[0].text;
-            testimonialNameEl.textContent = testimonials[0].name;
-            testimonialTrackEl.textContent = testimonials[0].track;
-            
-            // Change testimonial every 5 seconds (only if motion is not reduced)
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                setInterval(updateTestimonial, 10000);
-            }
-
-            // Keyboard navigation for testimonials
-            document.addEventListener('keydown', (e) => {
-                if (e.target.closest('#hero')) {
-                    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                        updateTestimonial();
-                    }
-                }
-            });
-        }
+        // Modern Testimonials Carousel
+        this.initTestimonials();
 
         // Button Event Listeners
         const viewCoursesBtn = document.querySelector('.btn-primary');
@@ -411,6 +318,426 @@ class TripleDotsWebsite {
         console.log('✅ Footer initialized');
     }
 
+    // --- MODERN TESTIMONIALS SYSTEM ---
+    initTestimonials() {
+        console.log('Initializing Modern Testimonials...');
+        
+        const container = document.getElementById('testimonials-container');
+        if (!container) return;
+
+        const testimonials = [
+            {
+                image: './assets/bj.jpg',
+                text: 'I was working in retail for 3 years and felt stuck. After completing the web development program at Tripledots, I got my first developer job at a fintech startup in Lagos. The hands-on projects and portfolio we built made all the difference during interviews.',
+                name: 'BJ',
+                track: 'Web Development Graduate'
+            },
+            {
+                image: './assets/dora.jpg',
+                text: 'TripleDots was a game-changer in my learning journey. It helped me build a strong foundation in machine learning, breaking down tough concepts into simple steps. From supervised models to building real projects, I gained hands-on skills.',
+                name: 'Isidora Obeahon',
+                track: 'AI/ML & Python'
+            },
+            {
+                image: './assets/esther.jpg',
+                text: 'What impressed me most wasn\'t just the coding - it was learning how to think like a developer. The debugging sessions, code reviews, and real client projects prepared me for the chaos of startup life.',
+                name: 'Esther Owolabi',
+                track: 'Web Development'
+            },
+            {
+                image: './assets/habib.jpg',
+                text: 'Our company had security vulnerabilities we couldn\'t identify. After our IT team went through Tripledots\' cybersecurity training, we discovered and fixed 15 critical issues. The ROI was immediate.',
+                name: 'Habib',
+                track: 'Networking & Cybersecurity'
+            },
+            {
+                image: './assets/mj.jpg',
+                text: 'I was manually creating reports for hours every week. Learning Python and Power BI at Tripledots changed everything. Now I automate those reports in minutes and focus on actual analysis.',
+                name: 'Mujeeb Adisa',
+                track: 'Data Analysis with Python'
+            },
+            {
+                image: './assets/victory.jpg',
+                text: 'The entrepreneurship mindset they teach alongside the technical skills is gold. I built my first SaaS product during the program and launched it 2 months after graduation.',
+                name: 'Victory',
+                track: 'Web Development'
+            },
+            {
+                image: './assets/maryam.jpg',
+                text: 'I had the theory from school, but Tripledots gave me the practical skills. Now I bridge academic knowledge with real-world computer networking and cybersecurity solutions.',
+                name: 'Maryam Omowumi Adebayo',
+                track: 'Network Security Engineering'
+            }
+        ];
+
+        // Initialize testimonials state
+        this.testimonials = {
+            data: testimonials,
+            currentIndex: 0,
+            isPlaying: true,
+            interval: null,
+            transitionDuration: 600
+        };
+
+        // Render testimonials
+        this.renderTestimonials();
+        this.renderTestimonialControls();
+        
+        // Setup events
+        this.setupTestimonialEvents();
+        
+        // Start autoplay
+        this.startTestimonialAutoplay();
+        
+        console.log('✅ Modern Testimonials initialized');
+    }
+
+    renderTestimonials() {
+        const track = document.getElementById('testimonials-track');
+        const indicatorsContainer = document.getElementById('testimonials-indicators');
+        const counter = document.getElementById('testimonials-counter');
+        
+        if (!track || !indicatorsContainer || !counter) return;
+
+        // Clear existing content
+        track.innerHTML = '';
+        indicatorsContainer.innerHTML = '';
+
+        // Render testimonial slides
+        this.testimonials.data.forEach((testimonial, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'testimonial-slide';
+            slide.innerHTML = `
+                <div class="testimonial-profile">
+                    <img src="${testimonial.image}" alt="${testimonial.name}" loading="lazy">
+                </div>
+                <p class="testimonial-text">"${testimonial.text}"</p>
+                <div class="testimonial-author">
+                    <div class="author-name">${testimonial.name}</div>
+                    <div class="author-track">${testimonial.track}</div>
+                </div>
+            `;
+            track.appendChild(slide);
+
+            // Render indicator dot
+            const dot = document.createElement('button');
+            dot.className = 'testimonial-dot';
+            dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
+            dot.dataset.index = index;
+            if (index === 0) dot.classList.add('active');
+            indicatorsContainer.appendChild(dot);
+        });
+
+        // Update counter
+        counter.querySelector('.total').textContent = this.testimonials.data.length;
+        
+        // Handle image loading errors
+        track.querySelectorAll('img').forEach(img => {
+            img.onerror = () => {
+                img.src = 'https://placehold.co/100x100/333333/ffffff?text=' + 
+                         encodeURIComponent(img.alt.split(' ')[0].charAt(0));
+            };
+        });
+    }
+
+    renderTestimonialControls() {
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        
+        if (prevBtn && nextBtn) {
+            // Update button states
+            prevBtn.disabled = this.testimonials.currentIndex === 0;
+            nextBtn.disabled = this.testimonials.currentIndex === this.testimonials.data.length - 1;
+        }
+    }
+
+    setupTestimonialEvents() {
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const indicatorsContainer = document.getElementById('testimonials-indicators');
+        const container = document.getElementById('testimonials-container');
+
+        // Navigation buttons
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                this.goToTestimonial(this.testimonials.currentIndex - 1);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                this.goToTestimonial(this.testimonials.currentIndex + 1);
+            });
+        }
+
+        // Play/pause button
+        if (playPauseBtn) {
+            playPauseBtn.addEventListener('click', () => {
+                this.toggleTestimonialAutoplay();
+            });
+        }
+
+        // Indicator dots
+        if (indicatorsContainer) {
+            indicatorsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('testimonial-dot')) {
+                    const index = parseInt(e.target.dataset.index);
+                    this.goToTestimonial(index);
+                }
+            });
+        }
+
+        // Pause on hover
+        if (container) {
+            container.addEventListener('mouseenter', () => {
+                if (this.testimonials.isPlaying) {
+                    this.pauseTestimonialAutoplay();
+                    this.testimonials.wasPlayingBeforeHover = true;
+                }
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (this.testimonials.wasPlayingBeforeHover) {
+                    this.startTestimonialAutoplay();
+                    this.testimonials.wasPlayingBeforeHover = false;
+                }
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.target.closest('#testimonials-container')) {
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        this.goToTestimonial(this.testimonials.currentIndex - 1);
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        this.goToTestimonial(this.testimonials.currentIndex + 1);
+                        break;
+                    case ' ':
+                        e.preventDefault();
+                        this.toggleTestimonialAutoplay();
+                        break;
+                }
+            }
+        });
+
+        // Touch/swipe support
+        this.setupTestimonialSwipeEvents();
+    }
+
+    setupTestimonialSwipeEvents() {
+        const track = document.getElementById('testimonials-track');
+        if (!track) return;
+
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+
+        const handleStart = (e) => {
+            startX = e.touches ? e.touches[0].clientX : e.clientX;
+            startY = e.touches ? e.touches[0].clientY : e.clientY;
+            isDragging = true;
+            track.style.transition = 'none';
+        };
+
+        const handleMove = (e) => {
+            if (!isDragging) return;
+            
+            const currentX = e.touches ? e.touches[0].clientX : e.clientX;
+            const currentY = e.touches ? e.touches[0].clientY : e.clientY;
+            
+            const deltaX = currentX - startX;
+            const deltaY = currentY - startY;
+            
+            // Only handle horizontal swipes
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+                e.preventDefault();
+            }
+        };
+
+        const handleEnd = (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+            const deltaX = endX - startX;
+            
+            track.style.transition = '';
+            
+            // Trigger navigation based on swipe direction
+            if (Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    this.goToTestimonial(this.testimonials.currentIndex - 1);
+                } else {
+                    this.goToTestimonial(this.testimonials.currentIndex + 1);
+                }
+            }
+        };
+
+        // Touch events
+        track.addEventListener('touchstart', handleStart, { passive: false });
+        track.addEventListener('touchmove', handleMove, { passive: false });
+        track.addEventListener('touchend', handleEnd);
+
+        // Mouse events (for desktop dragging)
+        track.addEventListener('mousedown', handleStart);
+        track.addEventListener('mousemove', handleMove);
+        track.addEventListener('mouseup', handleEnd);
+        track.addEventListener('mouseleave', handleEnd);
+    }
+
+    goToTestimonial(index) {
+        // Clamp index to valid range
+        index = Math.max(0, Math.min(index, this.testimonials.data.length - 1));
+        
+        if (index === this.testimonials.currentIndex) return;
+        
+        const track = document.getElementById('testimonials-track');
+        const indicators = document.querySelectorAll('.testimonial-dot');
+        const counter = document.getElementById('testimonials-counter');
+        
+        if (!track) return;
+
+        // Update current index
+        const oldIndex = this.testimonials.currentIndex;
+        this.testimonials.currentIndex = index;
+
+        // Animate to new position
+        const translateX = -index * 100;
+        track.style.transform = `translateX(${translateX}%)`;
+
+        // Update indicators
+        indicators.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+
+        // Update counter
+        if (counter) {
+            counter.querySelector('.current').textContent = index + 1;
+        }
+
+        // Update navigation buttons
+        this.renderTestimonialControls();
+
+        // Track analytics
+        this.trackEvent('testimonial_viewed', { 
+            index, 
+            name: this.testimonials.data[index].name 
+        });
+    }
+
+    startTestimonialAutoplay() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return; // Respect user's motion preferences
+        }
+
+        this.stopTestimonialAutoplay();
+        
+        this.testimonials.interval = setInterval(() => {
+            let nextIndex = this.testimonials.currentIndex + 1;
+            if (nextIndex >= this.testimonials.data.length) {
+                nextIndex = 0; // Loop back to start
+            }
+            this.goToTestimonial(nextIndex);
+        }, 8000); // 8 seconds per testimonial
+
+        this.testimonials.isPlaying = true;
+        
+        // Update play/pause button
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        if (playPauseBtn) {
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            playPauseBtn.classList.remove('paused');
+            playPauseBtn.setAttribute('aria-label', 'Pause autoplay');
+        }
+    }
+
+    stopTestimonialAutoplay() {
+        if (this.testimonials.interval) {
+            clearInterval(this.testimonials.interval);
+            this.testimonials.interval = null;
+        }
+        this.testimonials.isPlaying = false;
+    }
+
+    pauseTestimonialAutoplay() {
+        this.stopTestimonialAutoplay();
+        
+        // Update play/pause button
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        if (playPauseBtn) {
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            playPauseBtn.classList.add('paused');
+            playPauseBtn.setAttribute('aria-label', 'Resume autoplay');
+        }
+    }
+
+    toggleTestimonialAutoplay() {
+        if (this.testimonials.isPlaying) {
+            this.pauseTestimonialAutoplay();
+        } else {
+            this.startTestimonialAutoplay();
+        }
+    }
+
+    // --- SCROLL PROGRESS INDICATOR ---
+    initScrollProgress() {
+        console.log('Initializing Scroll Progress...');
+        
+        const progressBar = document.getElementById('scroll-progress');
+        if (!progressBar) return;
+
+        const updateScrollProgress = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            
+            progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+        };
+
+        // Throttled scroll listener for performance
+        window.addEventListener('scroll', this.throttle(updateScrollProgress, 10));
+        
+        console.log('✅ Scroll Progress initialized');
+    }
+
+    // --- BACK TO TOP BUTTON ---
+    initBackToTop() {
+        console.log('Initializing Back to Top...');
+        
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (!backToTopBtn) return;
+
+        // Show/hide based on scroll position
+        const toggleBackToTop = () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        };
+
+        // Smooth scroll to top
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Track analytics
+            this.trackEvent('back_to_top_clicked');
+        });
+
+        // Throttled scroll listener
+        window.addEventListener('scroll', this.throttle(toggleBackToTop, 100));
+        
+        console.log('✅ Back to Top initialized');
+    }
+
     // --- NAVIGATION ENHANCEMENTS ---
     initNavigation() {
         console.log('Initializing Navigation...');
@@ -540,13 +867,39 @@ class TripleDotsWebsite {
             .hero-left h1,
             .hero-left .tagline,
             .hero-left p,
-            .testimonial-card,
+            .testimonials-container,
             .card,
             .image-container,
             .contact-item
         `);
 
         elementsToObserve.forEach(el => observer.observe(el));
+
+        // Subtle parallax for hero background (only on desktop)
+        if (!this.isMobile() && window.innerWidth > 768) {
+            let ticking = false;
+            
+            const updateParallax = () => {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.hero-bg-media .bg-item, .hero-bg-media video');
+                
+                parallaxElements.forEach(element => {
+                    const speed = 0.5;
+                    element.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+                
+                ticking = false;
+            };
+            
+            const requestParallaxUpdate = () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            };
+            
+            window.addEventListener('scroll', requestParallaxUpdate);
+        }
 
         console.log('✅ Scroll Effects initialized');
     }

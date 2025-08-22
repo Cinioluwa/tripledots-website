@@ -90,6 +90,9 @@
 </head>
 <body>
 
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <!-- Header with Navigation (from hero section) -->
     <header class="main-header">
         <nav class="navbar">
@@ -144,16 +147,38 @@
                 </div>
                 
                 <div class="hero-right">
-                    <div class="testimonial-card" id="testimonial-card">
-                        <div class="testimonial-profile" id="testimonial-profile">
-                            <img id="testimonial-image" src="./assets/bj.jpg" alt="Student">
+                    <div class="testimonials-container" id="testimonials-container">
+                        <div class="testimonials-header">
+                            <h3 class="testimonials-title">Student Success Stories</h3>
+                            <div class="testimonials-controls">
+                                <button class="testimonial-nav prev" id="prev-btn" aria-label="Previous testimonial">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="testimonial-nav next" id="next-btn" aria-label="Next testimonial">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
-                        <p class="testimonial-text" id="testimonial-text">
-                            "Tripledots has helped me develop real world skills in..."
-                        </p>
-                        <div class="testimonial-author">
-                            <div class="author-name" id="testimonial-name">BJ Oladele</div>
-                            <div class="author-track" id="testimonial-track">Web Development</div>
+                        
+                        <div class="testimonials-wrapper">
+                            <div class="testimonials-track" id="testimonials-track">
+                                <!-- Testimonials will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div class="testimonials-indicators" id="testimonials-indicators">
+                            <!-- Dots will be dynamically inserted here -->
+                        </div>
+                        
+                        <div class="testimonials-meta">
+                            <div class="testimonials-counter" id="testimonials-counter">
+                                <span class="current">1</span> / <span class="total">7</span>
+                            </div>
+                            <div class="testimonials-status">
+                                <button class="play-pause-btn" id="play-pause-btn" aria-label="Pause autoplay">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -321,6 +346,11 @@
             <p>&copy; 2025 Tripledots Technologies. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <!-- Main JavaScript File -->
     <script src="./scroll-effects.js"></script>
