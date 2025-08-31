@@ -329,14 +329,14 @@ class TripleDotsWebsite {
             {
                 image: './assets/bj.jpg',
                 text: 'I was working in retail for 3 years and felt stuck. After completing the web development program at Tripledots, I got my first developer job at a fintech startup in Lagos. The hands-on projects and portfolio we built made all the difference during interviews.',
-                name: 'BJ',
+                name: 'Folarin Josiah',
                 track: 'Web Development Graduate'
             },
             {
                 image: './assets/dora.jpg',
                 text: 'TripleDots was a game-changer in my learning journey. It helped me build a strong foundation in machine learning, breaking down tough concepts into simple steps. From supervised models to building real projects, I gained hands-on skills.',
                 name: 'Isidora Obeahon',
-                track: 'AI/ML & Python'
+                track: 'AI/ML'
             },
             {
                 image: './assets/esther.jpg',
@@ -352,9 +352,9 @@ class TripleDotsWebsite {
             },
             {
                 image: './assets/mj.jpg',
-                text: 'I was manually creating reports for hours every week. Learning Python and Power BI at Tripledots changed everything. Now I automate those reports in minutes and focus on actual analysis.',
+                text: 'I learned Python, Excel, and Power BI in one program and also improved my presentation and storytelling skills. They have a practical and supportive teaching style, and the set of tools prepared me for real world data challenges. I feel confident now to work on professional projects and highly recommend Tripledots to anyone looking to upskill.',
                 name: 'Mujeeb Adisa',
-                track: 'Data Analysis with Python'
+                track: 'Data Analysis'
             },
             {
                 image: './assets/victory.jpg',
@@ -367,6 +367,12 @@ class TripleDotsWebsite {
                 text: 'I had the theory from school, but Tripledots gave me the practical skills. Now I bridge academic knowledge with real-world computer networking and cybersecurity solutions.',
                 name: 'Maryam Omowumi Adebayo',
                 track: 'Network Security Engineering'
+            },
+            {
+                image: './assets/goshen.jpg',
+                text: 'At tripledot technologies, you are drilling for excellence, not just in tech industries, but across various fecets of life. If learning tech is what you want to do and do well, I will recommend Tripledot technologies at anytime. Tripledot technologies built tech ,virtue needed to thrive in life, and excellence into me. Thank you TDT.',
+                name: 'Goshen Uwuangue',
+                track: 'Web Development'
             }
         ];
 
