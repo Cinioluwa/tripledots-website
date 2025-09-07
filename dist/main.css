@@ -26,9 +26,11 @@
     --font-script: 'Pacifico', cursive;
     --font-footer: 'Dancing Script', cursive;
     
-    /* Spacing */
-    --section-padding: 3rem 2rem;
+    /* Consistent Spacing & Layout */
+    --section-padding: 4rem 2rem;
     --container-max-width: 1440px;
+    --content-side-margin: 5%;
+    --heading-margin: 0 0 3rem var(--content-side-margin);
     
     /* Responsive image heights */
     --about-image-max-height: 330px;
@@ -75,7 +77,25 @@ main {
 .container {
     max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 var(--content-side-margin);
+}
+
+/* Universal section container for consistent spacing */
+.section-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-side-margin);
+}
+
+/* Consistent heading styles across all sections */
+.section-heading {
+    color: var(--primary-blue);
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 400;
+    text-align: left;
+    margin: var(--heading-margin);
+    text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
 .text-center {
@@ -873,38 +893,39 @@ main {
 #about h1 {
     color: var(--primary-blue);
     font-family: var(--font-heading);
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: 400;
     text-align: left;
-    margin: 0 0 50px 150px;
+    margin: var(--heading-margin);
     text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
 #about-main {
     display: flex;
     flex-direction: column;
-    max-width: 1400px;
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    gap: 30px;
+    padding: 0 var(--content-side-margin);
+    gap: 2rem;
 }
 
 #about p {
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 2;
     font-weight: 500;
     color: var(--text-dark);
     text-align: justify;
-    margin: 0 150px 0 70px;
+    margin: 0;
 }
 
 .img {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    margin: 40px auto;
+    gap: 2.5rem;
+    margin: 2.5rem auto;
     width: 100%;
-    max-width: 1200px;
+    max-width: var(--container-max-width);
     flex-wrap: nowrap;
 }
 
@@ -966,192 +987,159 @@ main {
 
 /* ===== COURSES SECTION STYLES ===== */
 #courses {
+    margin: 0;
+    font-family: "Palanquin", sans-serif;
+    padding: var(--section-padding);
     background: #ffffff;
-    background-image: url('./assets/pic2.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-attachment: fixed;
-    padding: var(--section-padding);
     min-height: 100vh;
-    position: relative;
+    line-height: 1.6;
+    background-image: url('assets/pic2.jpg')
 }
 
-#courses::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Use a very light, non-obstructive overlay so the card colors read clearly */
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(2px);
-    z-index: 1;
-}
-
-#courses > * {
-    position: relative;
-    z-index: 2;
-}
-
-#courses h1 {
-    color: var(--text-light);
+#courses h1{
+    color: var(--primary-blue);
     font-family: var(--font-heading);
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: 400;
     text-align: left;
-    margin: 0 0 50px 150px;
-    text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.829);
+    margin: var(--heading-margin);
+    text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
-#courses-main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-    max-width: 1400px;
+#main{
+    display: grid;
+    grid-template-columns: 1fr minmax(400px,500px) 1fr;
+    align-items: flex-start;
+    gap: 4rem;
+    max-width: var(--container-max-width);
     margin: 0 auto;
-}
-
-.card {
-    background: var(--highlight-blue);
-    border-radius: 25px;
-    width: 362px;
-    height: 250px;
-    padding: 20px;
-    transition: var(--transition-smooth);
-    cursor: pointer;
+    margin-top: 2rem;
+    padding: 0 var(--content-side-margin);
     position: relative;
-    box-shadow: 0px 18px 2px 0px rgba(0, 0, 0, 0.5);
-    margin: 5px 15px 90px 0;
-    overflow: hidden;
 }
 
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+.left, .right { 
+    display:flex; 
+    flex-direction:column; 
+    gap:70px; 
 }
 
-/* Add course icons */
-.card::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 80px;
-    height: 80px;
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 50%;
-    opacity: 0;
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    z-index: 0;
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.12),
-        inset 0 2px 8px rgba(255, 255, 255, 0.1);
+.center-img { 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    position:sticky; 
+    top:70px; 
+    height:100%; 
+    padding:0; 
 }
 
-.card:hover::after {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+.centre-image { 
+    width:900px; 
+    height:auto; 
+    filter:drop-shadow(0 18px 40px rgba(0,0,0,.18)); 
+    transition:transform .5s cubic-bezier(.25,.8,.25,1), filter .5s; 
 }
 
-/* Course-specific icons */
-/* Office Productivity - Document/Office icon */
-.card:nth-child(1)::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(0,0,0,0.15)' viewBox='0 0 24 24'%3E%3Cpath d='M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z'/%3E%3C/svg%3E");
-    background-size: 28px;
-    background-repeat: no-repeat;
-    background-position: center;
+/* .centre-image:hover { 
+    transform:translateY(-10px) scale(1.05); 
+    filter:drop-shadow(0 30px 55px rgba(0,0,0,.28)); 
+} */
+
+#courses img{
+    display: block;
+    margin: 0;
+    line-height: 0;
+    height: auto; /* global images */
 }
 
-/* Python Programming - Python/Code icon */
-.card:nth-child(2)::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(0,0,0,0.15)' viewBox='0 0 24 24'%3E%3Cpath d='M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21A7,7 0 0,1 14,26H10A7,7 0 0,1 3,19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z'/%3E%3C/svg%3E");
-    background-size: 28px;
-    background-repeat: no-repeat;
-    background-position: center;
+/* Course cards layout */
+#courses .card { 
+    width:100%; 
+    max-width:420px; 
+    /* background:#ffffff;  */
+    padding:0 0 24px 0; 
+    position:relative; 
+    margin:0; 
+    display:flex; 
+    flex-direction:column; 
+    gap:14px; 
 }
 
-/* Web Development - Web/Browser icon */
-.card:nth-child(3)::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(0,0,0,0.15)' viewBox='0 0 24 24'%3E%3Cpath d='M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8Z'/%3E%3C/svg%3E");
-    background-size: 28px;
-    background-repeat: no-repeat;
-    background-position: center;
+#courses .head { 
+    color:#0c162c; 
+    font-family:"Palanquin Dark", sans-serif; 
+    font-size:26px; 
+    font-weight:600; 
+    text-transform:none; 
+    margin:0 0 6px 0; 
+    line-height:1.25; 
+    letter-spacing:.3px; 
+    padding-left:70px; 
+    position:relative; 
 }
 
-/* Data Analysis - Chart/Analytics icon */
-.card:nth-child(4)::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(0,0,0,0.15)' viewBox='0 0 24 24'%3E%3Cpath d='M22,21H2V3H4V19H6V17H10V19H12V16H16V19H18V17H22V21Z'/%3E%3C/svg%3E");
-    background-size: 28px;
-    background-repeat: no-repeat;
-    background-position: center;
+#courses .head i { 
+    position:absolute; 
+    left:0; 
+    top:50%; 
+    transform:translateY(-50%); 
+    width:48px; 
+    height:48px; 
+    background:#f8f9fa; 
+    border-radius:50%; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    font-size:20px; 
+    color:#0c162c; 
+    box-shadow:0 4px 12px rgba(0,0,0,.2); 
 }
 
-/* Networking & Cybersec - Shield/Security icon */
-.card:nth-child(5)::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(0,0,0,0.15)' viewBox='0 0 24 24'%3E%3Cpath d='M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11C15.4,11 16,11.4 16,12V16C16,16.6 15.6,17 15,17H9C8.4,17 8,16.6 8,16V12C8,11.4 8.4,11 9,11V10C9,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.2,8.7 10.2,10V11H13.8V10C13.8,8.7 12.8,8.2 12,8.2Z'/%3E%3C/svg%3E");
-    background-size: 28px;
-    background-repeat: no-repeat;
-    background-position: center;
+#courses .write { 
+    color:#1a2436; 
+    font-family:"Palanquin", sans-serif; 
+    font-size:18px; 
+    font-weight:500; 
+    margin:0 0 4px 70px; 
+    line-height:1.6; 
+    max-width:350px; 
+    text-shadow: 4px 5px 4px rgb(209, 207, 207);
 }
 
-/* Machine Learning - Brain/AI icon */
-.card:nth-child(6)::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(0,0,0,0.15)' viewBox='0 0 24 24'%3E%3Cpath d='M21.33,12.91C21.42,14.46 20.71,15.95 19.44,16.86L20.21,18.35C20.44,18.8 20.47,19.33 20.27,19.8C20.08,20.27 19.69,20.64 19.21,20.8L18.42,21.05C18.25,21.11 18.06,21.14 17.88,21.14C17.37,21.14 16.89,20.91 16.56,20.5L14.44,18C13.55,17.85 12.71,17.47 12,16.9C11.5,17.05 11,17.13 10.5,17.13C9.62,17.13 8.74,16.86 8,16.35C7.61,16.13 7.26,15.85 6.97,15.54C6.08,14.65 5.63,13.47 5.63,12.25C5.63,11.03 6.08,9.85 6.97,8.96C7.26,8.65 7.61,8.37 8,8.15C8.74,7.64 9.62,7.37 10.5,7.37C11,7.37 11.5,7.45 12,7.6C12.71,7.03 13.55,6.65 14.44,6.5L16.56,4C16.89,3.59 17.37,3.36 17.88,3.36C18.06,3.36 18.25,3.39 18.42,3.45L19.21,3.7C19.69,3.86 20.08,4.23 20.27,4.7C20.47,5.17 20.44,5.7 20.21,6.15L19.44,7.64C20.71,8.55 21.42,10.04 21.33,11.59C21.33,12.03 21.33,12.47 21.33,12.91M19.13,12.91C19.13,11.6 18.5,10.4 17.5,9.64L17.8,8.97C17.84,8.88 17.85,8.78 17.82,8.68C17.79,8.58 17.73,8.5 17.64,8.45L16.85,8.2C16.76,8.15 16.66,8.14 16.56,8.17C16.46,8.2 16.38,8.26 16.33,8.35L15.83,9.32C15.45,9.22 15.06,9.17 14.67,9.17C14.6,9.17 14.54,9.17 14.47,9.17L12.96,7.5C12.9,7.43 12.82,7.39 12.73,7.39C12.64,7.39 12.56,7.43 12.5,7.5L11.17,9.17C11.1,9.17 11.04,9.17 10.97,9.17C10.58,9.17 10.19,9.22 9.81,9.32L9.31,8.35C9.26,8.26 9.18,8.2 9.08,8.17C8.98,8.14 8.88,8.15 8.79,8.2L8,8.45C7.91,8.5 7.85,8.58 7.82,8.68C7.79,8.78 7.8,8.88 7.84,8.97L8.14,9.64C7.14,10.4 6.51,11.6 6.51,12.91C6.51,14.22 7.14,15.42 8.14,16.18L7.84,16.85C7.8,16.94 7.79,17.04 7.82,17.14C7.85,17.24 7.91,17.32 8,17.37L8.79,17.62C8.88,17.67 8.98,17.68 9.08,17.65C9.18,17.62 9.26,17.56 9.31,17.47L9.81,16.5C10.19,16.6 10.58,16.65 10.97,16.65C11.04,16.65 11.1,16.65 11.17,16.65L12.5,18.32C12.56,18.39 12.64,18.43 12.73,18.43C12.82,18.43 12.9,18.39 12.96,18.32L14.47,16.65C14.54,16.65 14.6,16.65 14.67,16.65C15.06,16.65 15.45,16.6 15.83,16.5L16.33,17.47C16.38,17.56 16.46,17.62 16.56,17.65C16.66,17.68 16.76,17.67 16.85,17.62L17.64,17.37C17.73,17.32 17.79,17.24 17.82,17.14C17.85,17.04 17.84,16.94 17.8,16.85L17.5,16.18C18.5,15.42 19.13,14.22 19.13,12.91Z'/%3E%3C/svg%3E");
-    background-size: 28px;
-    background-repeat: no-repeat;
-    background-position: center;
+.learn-btn { 
+    margin-left:70px; 
+    align-self:flex-start; 
+    background:#ffffff; 
+    border:1.5px solid #0c162c; 
+    color:#0c162c; 
+    font-family:"Palanquin", sans-serif; 
+    font-size:16px; 
+    font-weight:500; 
+    padding:12px 24px; 
+    border-radius:24px; 
+    cursor:pointer; 
+    display:inline-flex; 
+    gap:6px; 
+    align-items:center; 
+    transition:background .3s ease, color .3s ease, transform .35s; 
 }
 
-.card:hover::before {
-    left: 100%;
+.learn-btn:hover { 
+    background:#0c162c; 
+    color:#ffffff; 
+    transform:translateY(-3px); 
 }
 
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+.learn-btn .arrow { 
+    transition:transform .4s cubic-bezier(.25,.8,.25,1); 
 }
 
-.card:focus {
-    outline: 1px solid var(--primary-blue);
-    outline-offset: 2px;
-}
-
-.head {
-    color: var(--text-light);
-    font-family: var(--font-heading);
-    font-size: 22px;
-    font-weight: 600;
-    text-transform: uppercase;
-    text-align: center;
-    margin: 15px 0 18px 0;
-    line-height: 1.3;
-    letter-spacing: 0.5px;
-    position: relative;
-    z-index: 10;
-}
-
-.write {
-    color: var(--text-light);
-    font-family: var(--font-primary);
-    font-size: 16px;
-    font-weight: 400;
-    text-align: center;
-    margin: 0 20px 20px 20px;
-    line-height: 1.6;
-    opacity: 0.9;
-    padding-bottom: 10px;
-    position: relative;
-    z-index: 10;
+.learn-btn:hover .arrow { 
+    transform:translateX(4px); 
 }
 
 /* ===== SERVICES SECTION STYLES ===== */
@@ -1175,19 +1163,20 @@ main {
 #services h1 {
     color: var(--primary-blue);
     font-family: var(--font-heading);
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: 400;
     text-align: left;
-    margin: 0 0 50px 150px;
+    margin: var(--heading-margin);
     text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
 #services-main {
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    max-width: 1800px;
+    gap: 3rem;
+    max-width: var(--container-max-width);
     margin: 0 auto;
+    padding: 0 var(--content-side-margin);
 }
 
 .section-1, .section-2 {
@@ -1205,10 +1194,10 @@ main {
 .bootcamp, .student {
     color: var(--text-dark);
     font-family: var(--font-heading);
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: 400;
     text-transform: uppercase;
-    margin-left: 150px;
+    margin: 0;
     position: static;
 }
 
@@ -1218,9 +1207,9 @@ main {
 
 .block-1, .block-2 {
     display: flex;
-    gap: 40px;
+    gap: 2.5rem;
     align-items: center;
-    margin: 0 150px;
+    margin: 0;
 }
 
 .pic-1, .pic-2 {
@@ -1264,27 +1253,29 @@ main {
 #contact {
     background: #ffffff;
     padding: var(--section-padding);
-    max-width: 1400px;
-    margin: 0 auto;
+    /* max-width: var(--container-max-width); */
     min-height: 100vh;
+    margin: 0 auto;
 }
 
 #contact h1 {
     color: var(--primary-blue);
     font-family: var(--font-heading);
-    font-size: 56px;
+    font-size: 3.5rem;
     font-weight: 400;
     text-align: left;
-    margin: 0 0 40px 20px;
+    margin:var(--heading-margin);
     text-shadow: 4px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
 .middle-section {
     display: flex;
-    gap: 40px;
+    gap: 2.5rem;
     align-items: center;
-    margin-bottom: 60px;
+    margin: 0 auto 3.75rem auto;
     min-height: 400px;
+    max-width: var(--container-max-width);
+    padding: 0 var(--content-side-margin);
 }
 
 .desc-section {
@@ -1566,8 +1557,8 @@ footer {
 @media (max-width: 1200px) {
     /* Hero adjustments */
     .hero-content {
-        gap: 50px;
-        padding: 0 20px;
+        gap: 3.125rem;
+        padding: 0 var(--content-side-margin);
     }
     
     .testimonial-card {
@@ -1622,23 +1613,24 @@ footer {
         margin: 0 0 40px 20px;
     }
     
-    #courses-main {
-        gap: 25px;
+    #main { 
+        gap: 30px; 
     }
     
-    .card {
-        width: 320px;
-        height: 220px;
+    #courses .card { 
+        max-width:480px; 
     }
     
-    .head {
-        font-size: 20px;
+    #courses .head { 
+        font-size:24px; 
     }
     
-    .write {
-        font-size: 16px;
-        margin: 15px 30px 0 30px;
-        line-height: 1.8;
+    #courses .write { 
+        font-size:16px; 
+    }
+    
+    .centre-image { 
+        max-width:100%; 
     }
 
     /* Tablet testimonials styling */
@@ -1836,6 +1828,43 @@ footer {
         width: 45%;
         align-self: center;
     }
+
+    /* Courses adjustments for tablets */
+    #main {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 900px;
+    }
+    
+    .left, .right {
+        gap: 3rem;
+    }
+    
+    .center-img {
+        order: 2;
+        margin: 2rem 0;
+    }
+    
+    .left {
+        order: 1;
+    }
+    
+    .right {
+        order: 3;
+    }
+    
+    #courses .card {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+    
+    #courses .head {
+        font-size: 1.6rem;
+    }
+    
+    #courses .write {
+        font-size: 1rem;
+    }
 }
 
 /* Mobile tablets */
@@ -1934,6 +1963,10 @@ footer {
         background-image: url('./assets/pic2_mobile.png');
     }
     
+    #courses {
+        padding: 2rem 1rem;
+    }
+    
     #courses h1 {
         font-size: 48px;
         text-align: center;
@@ -1941,23 +1974,51 @@ footer {
         text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.7);
     }
     
-    #courses-main {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
-        min-height: 167px;
-        margin-bottom: 20px;
+    #main { 
+        display:flex; 
+        flex-direction:column; 
+        gap:50px; 
     }
     
-    .write {
-        margin: 15px 20px 0 20px;
-        line-height: 1.5;
+    .left, .right { 
+        width:100%; 
+        gap:45px; 
+    }
+    
+    .center-img { 
+        order:-1; 
+        position:static; 
+    }
+    
+    .centre-image { 
+        max-width:350px; 
+    }
+    
+    #courses .card { 
+        max-width:440px; 
+    }
+    
+    #courses .head { 
+        padding-left:60px; 
+        font-size:22px; 
+    }
+    
+    #courses .head i { 
+        width:38px; 
+        height:38px; 
+        font-size:16px; 
+    }
+    
+    #courses .write, .learn-btn { 
+        margin-left:60px; 
+    }
+    
+    #courses .write { 
+        font-size:15px; 
+    }
+    
+    .learn-btn { 
+        font-size:14px; 
     }
 
     /* Services adjustments */
@@ -2275,33 +2336,44 @@ footer {
     }
 
     /* Courses adjustments */
+    #courses {
+        padding: 1.5rem 0.5rem;
+    }
+    
     #courses h1 {
         font-size: 36px;
+        text-align: center;
         margin: 0 0 25px 0;
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
     }
     
-    .card {
-        max-width: 272px;
-        padding: 15px;
-        height: auto;
-        min-height: 150px;
+    #courses .card { 
+        max-width:320px; 
     }
     
-    .head {
-        font-size: 18px;
-        margin-bottom: 15px;
+    .centre-image { 
+        max-width:350px; 
     }
     
-    .write {
-        font-size: 14px;
-        margin: 10px 15px 0 15px;
-        line-height: 1.4;
+    #courses .head { 
+        font-size:20px; 
+    }
+    
+    #courses .write { 
+        font-size:14px; 
+        line-height:1.45; 
+    }
+    
+    .learn-btn { 
+        font-size:13px; 
+        padding:8px 16px; 
     }
 
     /* Services adjustments */
     #services h1 {
         font-size: 36px;
-        margin: 0 0 70px 0;
+        text-align: center;
+        margin: 0 0 25px 0;
     }
     
     .bootcamp, .student {
@@ -2328,6 +2400,12 @@ footer {
     }
 
     /* Contact adjustments */
+
+    #contact h1{
+        font-size: 36px;
+        text-align: center;
+        margin: 0 0 25px 0;
+    }
     .desc-section p {
         font-size: 18px;
         margin: 16px;

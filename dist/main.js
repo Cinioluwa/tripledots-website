@@ -225,9 +225,55 @@ class TripleDotsWebsite {
             // Add ARIA labels for better accessibility
             const courseTitle = card.querySelector('.head')?.textContent;
             card.setAttribute('aria-label', `${courseTitle} course information`);
+            
+            // Add Learn More button functionality
+            const learnBtn = card.querySelector('.learn-btn');
+            if (learnBtn) {
+                learnBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.scrollToContact(courseTitle);
+                });
+            }
         });
 
         console.log('✅ Courses section initialized');
+    }
+
+    // Smooth scroll to contact section with course context
+    scrollToContact(courseTitle = '') {
+        const contactSection = document.getElementById('contact');
+        if (!contactSection) return;
+
+        // Add smooth scroll behavior
+        contactSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+        // Optional: Add a subtle highlight effect to show user arrived at contact
+        const contactHeader = contactSection.querySelector('h1');
+        if (contactHeader && courseTitle) {
+            // Temporarily update contact description to mention the course
+            const descSection = contactSection.querySelector('.desc-section p');
+            if (descSection) {
+                const originalText = descSection.textContent;
+                const courseText = courseTitle.replace(/\s*<i[^>]*>[^<]*<\/i>\s*/g, '').trim();
+                descSection.textContent = `Interested in ${courseText}? Whether you're curious about our programs, need custom training, or want to collaborate we're here to help.`;
+                
+                // Restore original text after 5 seconds
+                setTimeout(() => {
+                    descSection.textContent = originalText;
+                }, 10000);
+            }
+        }
+
+        // Add a brief highlight animation to the contact section
+        contactSection.style.transition = 'background-color 0.3s ease';
+        contactSection.style.backgroundColor = 'rgba(75, 172, 221, 0.05)';
+        
+        setTimeout(() => {
+            contactSection.style.backgroundColor = '';
+        }, 2000);
     }
 
     // --- SERVICES SECTION INITIALIZATION ---
