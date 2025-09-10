@@ -910,8 +910,8 @@ main {
 }
 
 #about p {
-    font-size: 1.25rem;
-    line-height: 2;
+    font-size: 18px;
+    line-height: 2.5;
     font-weight: 500;
     color: var(--text-dark);
     text-align: justify;
@@ -996,6 +996,7 @@ main {
     background-size: cover;
     min-height: 100vh;
     line-height: 1.6;
+    background-image: url('assets/pic2.jpg')
 }
 
 #courses h1{
@@ -1957,6 +1958,10 @@ footer {
         height: 50px;
     }
 
+    /* Courses adjustments */
+    #courses {
+        background-image: url('./assets/pic2_mobile.png');
+    }
     
     #courses {
         padding: 2rem 1rem;
