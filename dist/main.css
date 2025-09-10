@@ -996,7 +996,6 @@ main {
     background-size: cover;
     min-height: 100vh;
     line-height: 1.6;
-    background-image: url('assets/pic2.jpg')
 }
 
 #courses h1{
@@ -1958,10 +1957,6 @@ footer {
         height: 50px;
     }
 
-    /* Courses adjustments */
-    #courses {
-        background-image: url('./assets/pic2_mobile.png');
-    }
     
     #courses {
         padding: 2rem 1rem;
