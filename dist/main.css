@@ -910,8 +910,8 @@ main {
 }
 
 #about p {
-    font-size: 1.25rem;
-    line-height: 2;
+    font-size: 18px;
+    line-height: 2.5;
     font-weight: 500;
     color: var(--text-dark);
     text-align: justify;
@@ -996,6 +996,32 @@ main {
     background-size: cover;
     min-height: 100vh;
     line-height: 1.6;
+    /* Extra inner space at bottom to allow adding elements */
+    padding-bottom: 6rem;
+}
+
+#a{
+    left: 260px;
+    bottom: 60px;
+}
+
+#b{
+    right: 40px;
+}
+
+#c{
+    left: 350px;
+    top: 100px;
+}
+
+#d{
+    right: 50px;
+    top: 50px;
+}
+
+#e{
+    right: 60px;
+    top: 190px;
 }
 
 #courses h1{
@@ -1066,6 +1092,7 @@ main {
     display:flex; 
     flex-direction:column; 
     gap:14px; 
+    z-index: 99;
 }
 
 #courses .head { 
@@ -1554,6 +1581,13 @@ footer {
 
 /* Large screens and desktops */
 @media (max-width: 1200px) {
+    /* Disable desktop-only circular offsets on smaller screens */
+    #a, #b, #c, #d, #e {
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+    }
     /* Hero adjustments */
     .hero-content {
         gap: 3.125rem;
@@ -1957,9 +1991,8 @@ footer {
         height: 50px;
     }
 
-    
     #courses {
-        padding: 2rem 1rem;
+    padding: 2rem 1rem 5rem 1rem; /* extra bottom space */
     }
     
     #courses h1 {
@@ -2332,7 +2365,7 @@ footer {
 
     /* Courses adjustments */
     #courses {
-        padding: 1.5rem 0.5rem;
+    padding: 1.5rem 0.5rem 4rem 0.5rem; /* extra bottom space */
     }
     
     #courses h1 {
